@@ -200,6 +200,7 @@
 						
 						{{else}}
 							{{#if (lookup ../commentAuthorNames @index)}}
+							{{#if sessionflag}}
 							<div id = "new-comment-space-{{{this}}}" class = "row comment-space">
 								<div class = "col-sm-2 block-text">
 									<img class = "comment-avatar" src = "{{{lookup ../commentAuthorPictures @index}}}">
@@ -217,6 +218,23 @@
 									<p id = "report-body-{{{this}}}"> {{lookup ../bodies @index}} </p>
 								</div> <br/>
 							</div> 
+							{{else}}
+							<div id = "new-comment-space-{{{this}}}" class = "row comment-space">
+								<div class = "col-sm-2 block-text">
+									<img class = "comment-avatar" src = "{{{lookup ../commentAuthorPictures @index}}}">
+								</div>
+								
+								<div class = "col-sm-9 text-left commenter-name">
+									<h4> <a class = "user-link pointable" href = "/publicProfile/{{{lookup ../commentAuthors @index}}}" target = "_blank"><span id = "report-author-{{{this}}}">{{lookup ../commentAuthorNames @index}}</span></a> </h4> 
+									
+									<h6> 
+										{{lookup ../datesPosted @index}} 
+									</h6>
+									
+									<p id = "report-body-{{{this}}}"> {{lookup ../bodies @index}} </p>
+								</div> <br/>
+							</div> 
+							{{/if}}
 							{{/if}}
 						{{/if}}
 					{{/each}}
