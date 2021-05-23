@@ -86,24 +86,24 @@ Open the following website: http://linquiztics.herokuapp.com.
    Database population complete! Press Ctrl + C to continue.
    ```
 
-5. On the main project directory, run the following command:
+5. On the main project directory, run the following command to populate the database with **quizzes**:
    ```
    node misc/add_quiz_data.js
    ```
    
-   This will populate the database with quizzes. If the command is executed successfully, the following will be printed on the terminal (the assigned <code>_id</code> may vary):
+   If the command is executed successfully, the following will be printed on the terminal (the assigned <code>_id</code> may vary):
 
    ```
    Added {
        tags: [ 'animals', 'basic', 'German', 'introductory', 'vocabulary' ],
        subjectLanguages: [ 'German' ],
        ratings: [
-         5, 5, 5, 5, 4,
-         5, 5, 3, 1, 5
+           5, 5, 5, 5, 4,
+           5, 5, 3, 1, 5
        ],
        accuracies: [
-         100, 100, 86, 86, 71,
-         71, 57, 43, 29
+           100, 100, 86, 86, 71,
+           71, 57, 43, 29
        ],
        _id: 60a9556188b8f82cdc92368d,
        idNum: 1,
@@ -115,17 +115,74 @@ Open the following website: http://linquiztics.herokuapp.com.
    Database population complete! Press Ctrl + C to continue.
    ```
    
-6. On the main project directory, run the following command to **run the server**: 
+6. On the main project directory, run the following command to populate the database with **reported users**:
+   ```
+   node misc/add_userreport_data.js
+   ```
+   
+   If the command is executed successfully, the following will be printed on the terminal (the assigned <code>_id</code> may vary):
+
+   ```
+   Added {
+       _id: 60a959da39ac9f0c7cc6fa94,
+       index: 1,
+       name: 'Benny Terrier',
+       username: 'bulljanai',
+       reportDate: 2021-03-28T00:00:00.000Z,
+       report: 'Hate speech',
+       __v: 0
+       
+   [... truncated ...]
+   
+   Database population complete! Press Ctrl + C to continue.
+   ```
+   
+7. On the main project directory, run the following command to populate the database with **reported quizzes**:
+   ```
+   node misc/add_quizreport_data.js
+   ```
+   
+   If the command is executed successfully, the following will be printed on the terminal (the assigned <code>_id</code> may vary):
+
+   ```
+   Added {
+       _id: 60a959f76ea1853bf06ced89,
+       index: 1,
+       quizNum: 3,
+       title: 'Conyo 101',
+       author: 'danccgabe',
+       reportDate: 2021-03-31T00:00:00.000Z,
+       report: 'Hate speech',
+       __v: 0
+       
+   [... truncated ...]
+   
+   Database population complete! Press Ctrl + C to continue.
+   ```
+   
+8. On the main project directory, run the following command to populate the database with **reported comments**:
+   ```
+   node misc/add_commentreport_data.js
+   ```
+   
+   If the command is executed successfully, the following will be printed on the terminal:
+
+   ```
+   app listening at port 3000
+   Connected to: mongodb+srv://admin:admin@linquiztics.ndejq.mongodb.net/linquiztics?retryWrites=true&w=majority
+   ```
+   
+9. On the main project directory, run the following command to **run the server**: 
    ```
    node index.js
    ```
 
    If the command is executed successfully, the following will be displayed on the terminal:
    
-7. Open the web application by accessing the following link on a browser:
-   ```
-   http://localhost:3000
-   ```
+ 10. Open the web application by accessing the following link on a browser:
+     ```
+     http://localhost:3000
+     ```
    
 ### Administrator Credentials  
 
