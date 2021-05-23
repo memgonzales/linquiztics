@@ -203,14 +203,13 @@ Open the following website: http://linquiztics.herokuapp.com.
      ```
      http://localhost:3000
      ```
+
+     <img src="https://github.com/memgonzales/linquiztics/blob/master/website_screenshots/home.PNG?raw=True" alt="Homepage" width = 750> 
    
 ### Administrator Credentials  
 To log in as an administrator, go to the <a href = "https://linquiztics.herokuapp.com/login">Login</a> page and enter the following credentials:
    - Username: <code>linquizticsadmin</code>
    - Password: <code>ASDFGHJKL123;</code>
-   
-
-
 
 ## Built Using
 This project follows the Model-View-Controller (MVC) architectural pattern:
