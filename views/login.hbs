@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<title> Log In </title>
+		<link rel = "icon" type = "image/png" href = "assets/languages.png">
+		
+		<link rel = "stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+		<link rel = "stylesheet" href = "https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+		<link rel = "stylesheet" type = "text/css" href = "https://fonts.googleapis.com/css?family=Open+Sans">
+		<link rel = "stylesheet" type = "text/css" href = "styles/style.css">
+		<link rel = "stylesheet" type = "text/css" href = "styles/profile-style.css">
+		
+		<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"> </script>
+		<script src = "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"> </script>
+		<script src = "https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"> </script>
+		
+		<!-- Internal style sheet necessary to override DataTables formatting -->
+		<style>		
+			.dataTables_wrapper .dataTables_paginate .paginate_button {
+			  background: none;
+			  color: black !important;
+			  border: 0 !important;
+			}
+			
+			.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+			  background: none;
+			  color: black !important;
+			  border: 0 !important;
+			}
+
+			.dataTables_wrapper .dataTables_paginate .paginate_button:active {
+			  background: none;
+			  color: black !important;
+			  border: 0 !important;
+			}
+		</style>
+	</head>
+
+	<body id = "page-top">
+		<div id = "page">
+			{{> navbar flag = flag adminflag = adminflag username = username name = name firstname = firstname}}
+			<header class = "jumbotron top-header">
+				<div class = "container">
+					<div class = "row">
+						<div class = "col-sm-1"> </div>
+						<div class = "col-sm-4 text-center">
+							<img src = "assets/languages.png">
+						</div>
+						
+						<div class = "col-sm-7 top-header-text">
+							<h1> Log In </h1> 							
+							<p> 
+								Log in to access your quizzes and be able to rate and comment on the quizzes of other users.
+							</p>
+							
+							<p>	
+								Log in before taking a quiz to add to your streak and EXP!
+							</p>
+						</div>
+					</div>
+				</div>
+			</header>
+			
+			<div class = "container-fluid even-row">
+				<div class = "row">
+					<div class = "col-sm-7 block-text">
+						<br/>
+						<form id = "login-form" method = "post">
+							<div class = "form-group">
+								<label for = "username">Username</label>
+								<span id = "error-1" class = "error-input"> </span>
+								<input id = "username" name = "username" type = "text" class = "form-control" required> 
+							</div>
+							
+							<div class = "form-group">
+								<label for = "pwd">Password</label>
+								<input id = "pwd" name = "password" type = "password" class = "form-control" required> 
+							</div>
+							
+							<div class = "form-group">
+								<label for = "login"> </label>
+								<button id = "login" type = "submit" class = "btn btn-default btn-success btn-block">
+									Log In
+								</button>
+								
+							</div>
+						</form>
+					</div>
+					
+					<div class = "col-sm-4 text-left">
+						<h1> About Linquiztics </h1>
+						<p> Linquiztics is a language learning site that allows users to take and create quizzes about a variety of languages. <br><br>
+							At its core, Linquiztics is intended for users to share their language quizzes with one another and build positive learning habits. We hope you learn a lot and have fun!</p>
+					</div>
+					
+					<div class = "col-sm-1"> </div>
+				</div>
+			</div>
+			{{> footer}}
+		</div>
+		
+		<script src = "scripts/login.js"> </script>
+		<script src = "scripts/tooltip.js"> </script>
+		<script>
+			function checkIfAdmin() {
+				var username = document.getElementById("username").value;
+				var loginForm = document.getElementById("login-form");
+				
+				if (username == "admin") {
+					loginForm.action = "admin.html";
+				} else {
+					loginForm.action = "index-registered.html";
+				}
+			}
+		</script>
+	</body>
+
+</html>

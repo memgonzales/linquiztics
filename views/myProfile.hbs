@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<title> My Profile | {{username}} </title>
+		<link rel = "icon" type = "image/png" href = "../assets/languages.png">
+		
+		<link rel = "stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+		<link rel = "stylesheet" href = "https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+		<link rel = "stylesheet" type = "text/css" href = "https://fonts.googleapis.com/css?family=Open+Sans">
+		<link rel = "stylesheet" type = "text/css" href = "../styles/style.css">
+		<link rel = "stylesheet" type = "text/css" href = "../styles/profile-style.css">
+		
+		<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"> </script>
+		<script src = "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"> </script>
+		<script src = "https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"> </script>
+		
+		<!-- Internal style sheet necessary to override DataTables formatting -->
+		<style>		
+			.dataTables_wrapper .dataTables_paginate .paginate_button {
+			  background: none;
+			  color: black !important;
+			  border: 0 !important;
+			}
+			
+			.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+			  background: none;
+			  color: black !important;
+			  border: 0 !important;
+			}
+
+			.dataTables_wrapper .dataTables_paginate .paginate_button:active {
+			  background: none;
+			  color: black !important;
+			  border: 0 !important;
+			}
+		</style>
+	</head>
+
+	<body id = "page-top">
+		<div id = "side-bar">
+			{{> sidebar flag = flag adminflag = adminflag username = username name = name picture = picture streak = streak exp = exp league = league position = position}}
+		</div>
+		
+		<div id = "page">
+			{{> navbar flag = flag adminflag = adminflag username = username name = name firstname = firstname}}			
+			<div class = "container-fluid even-row header-row">
+				{{#if adminflag}}
+					<div class = "row">
+						<div class = "col-sm-12 block-text">
+							<h4> <span class = "glyphicon glyphicon-info-sign"> </span> &nbsp;For administrator-specific privileges, open the <a onclick = "showSidebar()" class = "website pointable">sidebar</a> <span class = "glyphicon glyphicon-new-window smaller-icon pointable" onclick = "showSidebar()"></span> &nbsp;and choose Admin Page. </h4>
+						</div>
+					</div>
+				{{/if}}
+			
+				<div class = "row">
+					<div class = "col-sm-8 block-text">
+						<h1> My Profile<span class = "error-input-bigger">{{message}}</span> </h1> <br/>
+						
+						<div class = "container-fluid">
+							<div class = "row">
+								<div class = "col-sm-8 text-left"> 
+									<h4 class = "detail-title">Name </h4> 
+									<span id = "username" class = "code-font word-wrapped">{{name}}</span>
+								</div>
+								{{#if adminflag}} {{else}}
+								<div class = "col-sm-4 text-left"> 
+									<button class = "block-btn-small" data-toggle = "modal" data-target = "#edit-username"> Edit </button> 
+								</div>
+								{{/if}}
+							</div> <br/>
+							
+							<div class = "row">
+								<div class = "col-sm-8 text-left"> 
+									<h4 class = "detail-title">Email Address</h4>
+									<span id = "email" class = "code-font word-wrapped">{{email}}</span>
+								</div>
+								{{#if adminflag}} {{else}}
+								<div class = "col-sm-4 text-left"> 
+									<button class = "block-btn-small" data-toggle = "modal" data-target = "#edit-email"> Edit </button> 
+								</div>
+								{{/if}}
+							</div> <br/>
+							
+							<div class = "row">
+								<div class = "col-sm-8 text-left"> 
+									<h4 class = "detail-title">Password 
+										<span data-toggle = "tooltip" title = "Should contain 8 to 128 characters, with at least one special character, number, and capital letter" class = "glyphicon glyphicon-question-sign smaller-icon"> </span> 
+									</h4>
+									<span id = "password" class = "code-font"> ****** </span>
+								</div>
+								{{#if adminflag}} {{else}}
+								<div class = "col-sm-4 text-left"> 
+									<button class = "block-btn-small" data-toggle = "modal" data-target = "#edit-password"> Edit </button>
+								</div>
+								{{/if}}
+							</div> <br/>
+							
+							<div class = "row">
+								<div class = "col-sm-8 text-left"> 
+									<h4 class = "detail-title">
+										Display Languages
+										<span data-toggle = "tooltip" title = "Preferred language in which quizzes are written" class = "glyphicon glyphicon-question-sign smaller-icon"> </span> 
+									</h4>
+									<span id = "display-languages" class = "code-font">{{displayLanguages}}</span>
+								</div>
+								{{#if adminflag}} {{else}}
+								<div class = "col-sm-4 text-left"> 
+									<button class = "block-btn-small" data-toggle = "modal" data-target = "#edit-lang"> Edit </button>
+								</div>
+								{{/if}}
+							</div>
+							
+						</div> <br/>
+					</div>
+					
+					<div class = "col-sm-4 text-center">
+						<div id = "container-for-overlay" class = "pointable">
+							<div id = "overlay" class = "pointable">
+							
+								<form id = "edit-profile-picture-form" method = "post" enctype = "multipart/form-data">
+									<label for = "profile-picture-upload" class = "pointable"> Change Picture &nbsp; <span class = "glyphicon glyphicon-picture"> </span> </label>
+									<input id = "profile-picture-upload" type = "file" accept = "image/*" name = "newProfilePicture" style = "display: none; ">
+									
+									<input id = "confirm-change-profile-picture" type = "submit" style = "display: none;">
+								</form>
+								
+							</div>
+							
+							<img id = "profile-picture" class = "profile-avatar-img" src = "{{{picture}}}">
+						</div>
+					</div>
+					
+				</div>
+			</div>
+			
+			<div class = "container-fluid odd-row">
+				<div class = "row">
+					<div class = "col-sm-12 block-text">
+						<h1> Leaderboard Details </h1>
+						<p> </p> <br/>
+						
+						<div class = "container-fluid">
+							<div class = "row">
+								<div class = "col-sm-3 text-center">
+									<img class = "leaderboard-icons" src = "../assets/streak.png">
+								</div>
+								
+								<div class = "col-sm-3 text-center">
+									<img class = "leaderboard-icons" src = "../assets/exp.png" style = "width: 70px;">
+								</div>
+								
+								<div class = "col-sm-3 text-center">
+									<img class = "leaderboard-icons" src = "../assets/featured.png">
+								</div>
+								
+								<div class = "col-sm-3 text-center">
+									<img class = "leaderboard-icons" src = "../assets/leaderboard.png">
+								</div>
+							</div>
+							
+							<div class = "row">
+								<div class = "col-sm-3 text-center">
+									<h4 class = "detail-title">Streak</h4>
+									{{streak}}
+								</div>
+								
+								<div class = "col-sm-3 text-center">
+									<h4 class = "detail-title">EXP</h4>
+									{{exp}}
+								</div>
+								
+								<div class = "col-sm-3 text-center">
+									<h4 class = "detail-title">League</h4>
+									{{league}}
+								</div>
+								
+								<div class = "col-sm-3 text-center">
+									<h4 class = "detail-title">Position</h4>
+									{{position}}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class = "container-fluid even-row">
+				<div class = "row">
+					<div class = "col-sm-12 block-text">
+						<h1> Quizzes Taken </h1>
+						<p> </p> <br/>
+						
+						<div class = "container-fluid">
+							<table id = "history-quizzes" class = "table table-hover table-responsive" data-page-length = "5">
+								<thead>
+									<tr>
+										<th> Date Taken </th>
+										<th> Quiz Name </th>
+										<th> Score </th>
+										<th> Status </th>
+									</tr>
+								</thead>
+								
+								<tbody>
+								{{#each dates}}
+									<tr>
+										<td> {{this}} </td>
+										<td> <a class = "quiz-names" href = "/quizTeaser/{{{lookup ../ids @index}}}" target = "_blank">{{lookup ../titles @index}} </a> </td>
+										<td> {{lookup ../accuracies @index}}% </td>
+										<td> {{lookup ../statuses @index}} </td>
+									</tr>
+								{{/each}}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class = "container-fluid odd-row">
+				<div class = "row">
+					<div class = "col-sm-12 block-text">
+						<h1> Account Deletion </h1>
+						<p> Deleting your account removes all your personal data, leaderboard data, created quizzes, and comments from the site database. Account deletion is irreversible. </p>
+						
+						<div class = "container-fluid">
+							<p class = "top-header-btn-grp"> 
+								<button class = "block-btn impt" data-toggle = "modal" data-target = "#delete-account"> Delete Account 
+								</button> 
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			{{> footer}}
+		</div>
+		
+		<div id = "edit-username" class = "modal fade">
+			<div class = "modal-dialog">
+				<div class = "modal-content">
+					<div class = "modal-header">
+						<p class = "close-x pointable" data-dismiss = "modal"> &times; </p>
+						<h4> Edit Username </h4>
+					</div>
+					
+					<div class = "modal-body">
+						<form id = "edit-username-form" method = "post">
+							<div class = "form-group">
+								<label for = "new-name">New Name</label>
+								<input id = "new-name" name = "newName" type = "text" class = "form-control" required> 
+							</div>
+							
+							<div class = "form-group">
+								<label for = "confirm-password">Confirm Password
+								<span id = "incorrect-password-edit-username" class = "error-input-hidden"> Incorrect password </span>
+								</label>
+								<input id = "password-for-username" name = "password" type = "password" class = "form-control" required>
+							</div>
+							
+							<div class = "form-group">
+								<label for = "confirm-change-username"> </label>
+								<button id = "confirm-change-username" type = "submit" class = "btn btn-default btn-success btn-block">
+									Confirm Change
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div id = "edit-email" class = "modal fade">
+			<div class = "modal-dialog">
+				<div class = "modal-content">
+					<div class = "modal-header">
+						<p class = "close-x pointable" data-dismiss = "modal"> &times; </p>
+						<h4> Edit Email </h4>
+					</div>
+					
+					<div class = "modal-body">
+						<form id = "edit-email-form" method = "post">
+							<div class = "form-group">
+								<label for = "new-email">New Email</label>
+								<input id = "new-email" name = "newEmail" type = "email" class = "form-control" required> 
+							</div>
+							
+							<div class = "form-group">
+								<label for = "confirm-password">Confirm Password
+								<span id = "incorrect-password-edit-email" class = "error-input-hidden"> Incorrect password </span>
+								</label>
+								<input id = "password-for-email" name = "password" type = "password" class = "form-control" required>
+							</div>
+							
+							<div class = "form-group">
+								<label for = "confirm-change-email"> </label>
+								<button id = "confirm-change-email" type = "submit" class = "btn btn-default btn-success btn-block">
+									Confirm Change
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div id = "edit-password" class = "modal fade">
+			<div class = "modal-dialog">
+				<div class = "modal-content">
+					<div class = "modal-header">
+						<p class = "close-x pointable" data-dismiss = "modal"> &times; </p>
+						<h4> Edit Password </h4>
+					</div>
+					
+					<div class = "modal-body">
+						<form id = "edit-password-form" method = "post">
+							<div class = "form-group">
+								<label for = "old-password">Old Password
+								<span id = "incorrect-password-edit-password" class = "error-input-hidden"> Incorrect password </span>
+								</label>
+								<input id = "old-password" name = "oldPassword" type = "password" class = "form-control" required> 
+							</div>
+							
+							<div class = "form-group">
+								<label for = "new-password">New Password
+								<span id = "invalid-password-format" class = "error-input-hidden"> Should contain 8 to 128 characters, with at least one special character, number, and capital letter </span>
+								</label>
+								<input id = "new-password" name = "newPassword" type = "password" class = "form-control" required> 
+							</div>
+							
+							<div class = "form-group">
+								<label for = "confirm-password">Repeat Password
+								<span id = "no-match-password" class = "error-input-hidden"> Passwords do not match </span>
+								</label>
+								<input id = "repeat-password" name = "repeatPassword" type = "password" class = "form-control" required>
+							</div>
+							
+							<p> An email will be sent to your registered email address to inform you of the password change. </p>
+							
+							<div class = "form-group">
+								<label for = "confirm-change-password"> </label>
+								<button id = "confirm-change-password" type = "submit" class = "btn btn-default btn-success btn-block">
+									Confirm Change
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div id = "edit-lang" class = "modal fade">
+			<div class = "modal-dialog">
+				<div class = "modal-content">
+					<div class = "modal-header">
+						<p class = "close-x pointable" data-dismiss = "modal"> &times; </p>
+						<h4> Edit Display Languages </h4>
+					</div>
+					
+					<div class = "modal-body">
+						<form id = "edit-lang-form" method = "post">
+							<div class = "form-group">
+								<label for = "lang-selection">Display Languages (Hold <span class = "code-font">ctrl</span> for multiple languages)</label>
+								<select id = "lang-selection"name = "displayLangs" class = "form-control" multiple>
+									<option value = "Chinese">Chinese</option>
+									<option value = "English">English</option>
+									<option value = "Filipino">Filipino</option>
+									<option value = "German">German</option>
+									<option value = "Japanese">Japanese</option>
+								</select>
+							</div>
+							
+							<div class = "form-group">
+								<label for = "confirm-change-display-languages"> </label>
+								<button id = "confirm-change-display-languages" type = "submit" class = "btn btn-default btn-success btn-block">
+									Confirm Change
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div id = "delete-account" class = "modal fade">
+			<div class = "modal-dialog">
+				<div class = "modal-content">
+					<div class = "modal-header">
+						<p class = "close-x pointable" data-dismiss = "modal"> &times; </p>
+						<h4> <span class = "glyphicon glyphicon-warning-sign left-float"> </span> &nbsp; Delete Account </h4>
+					</div>
+					
+					<div class = "modal-body">
+						<form id = "delete-account-form" method = "post">
+							<p id = "password-warning"> Deleting your account removes all your personal data, leaderboard data, created quizzes, and comments from the site database. Account deletion is irreversible. </p> <br/>
+							
+							<div class = "form-group">
+								<label for = "password-for-del">Enter password
+								<span id = "incorrect-password-delete-account" class = "error-input-hidden"> Incorrect password </span>
+								</label>
+								<input id = "password-for-del" name = "password" type = "password" class = "form-control" required> 
+							</div>
+							
+							<div class = "form-group">
+								<label for = "confirm-delete-account"> </label>
+								<button id = "confirm-delete-account" type = "submit" class = "btn btn-default btn-success btn-block">
+									Delete Account
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div id = "edit-profile-picture" class = "modal fade">
+			<div class = "modal-dialog">
+				<div class = "modal-content">
+					<div class = "modal-header">
+						<p class = "close-x pointable" data-dismiss = "modal"> &times; </p>
+						<h4> Edit Profile Picture </h4>
+					</div>
+					
+					<div class = "modal-body">
+						<form action = "/checkName" method = "post">
+							<div class = "form-group">
+								<label for = "new-picture">New Profile Picture</label>
+								<input id = "new-picture" name = "newPicture" type = "url" class = "form-control" required> 
+							</div>
+							
+							<div class = "form-group">
+								<label for = "confirm-change-picture"> </label>
+								<button id = "confirm-change-picture" type = "submit" class = "btn btn-default btn-success btn-block">
+									Confirm Change
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<script src = "../scripts/tooltip.js"> </script>
+		<script src = "../scripts/sidebar.js"> </script>
+		<script src = "../scripts/profile.js"> </script>
+	</body>
+</html>

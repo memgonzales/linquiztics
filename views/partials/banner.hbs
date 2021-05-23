@@ -1,0 +1,140 @@
+{{#if flag}}
+	<header class = "jumbotron top-header">
+		<div class = "container">
+			<div class = "row">
+				<div class = "col-sm-1"> </div>
+				<div class = "col-sm-4 text-center">
+					<img src = "assets/languages.png">
+				</div>
+				
+				<div class = "col-sm-7 top-header-text">
+					<h1> Hey there, {{#if adminflag}}Admin{{else}}Linquizt{{/if}}! </h1> <br/>
+					<p> Look through your profile or browse through your quizzes. </p>
+					
+					<p class = "top-header-btn-grp"> 
+						<a href = "/myProfile/{{username}}"><button class = "top-header-btn impt">Your Profile</button></a> 
+						<a id = "my-quizzes-btn" href = "/myQuizzes"><button class = "top-header-btn plain"> Your Quizzes </button></a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</header>
+	
+	<div class = "container-fluid even-row">
+		<div class = "row">
+			<div class = "col-sm-8 block-text">
+				<h1> Make Your Own Language Quiz </h1>
+				<p> Create a multiple-choice quiz centered around any of our five supported languages and publish it for other users to take. Browse through their comments and ratings once others take your quiz to improve your content!  </p>
+				<p class = "top-header-btn-grp"> 
+					<form id = "create-quiz-form" method = "post" action = "/createQuiz">
+						<input id = "author" type = "hidden" name = "author" value = "{{{username}}}">
+						<button class = "block-btn impt" type = "submit"> Create a Quiz
+						</button>
+					</form>
+				</p>
+			</div>
+			
+			<div class = "col-sm-2 text-center">
+				<img class = "regular-img" src = "assets/create-quiz.png">
+			</div>
+			
+			<div class = "col-sm-2"> </div>
+		</div>
+	</div>
+	
+	<div class = "container-fluid odd-row">
+		<div class = "row">
+			<div class = "col-sm-2"> </div>
+			<div class = "col-sm-2 text-center">
+				<img class = "regular-img" src = "assets/featured.png">
+			</div>
+			
+			<div class = "col-sm-8 block-text">
+				<h1> Browse the Best and Latest </h1>
+				<p> Browse through the ten most recently published quizzes and the ten highest-rated quizzes matching your chosen display languages. Try out a few featured quizzes to maintain your streak and gain more EXP! </p>
+				<p class = "top-header-btn-grp"> 
+					<a href = "/quizzes"><button class = "block-btn impt"> Featured Quizzes </button> </a>
+				</p>
+			</div>	
+		</div>
+	</div>
+
+{{else}}
+
+	<header class = "jumbotron top-header">
+		<div class = "container">
+			<div class = "row">
+				<div class = "col-sm-1"> </div>
+				<div class = "col-sm-4 text-center">
+					<img src = "assets/languages.png">
+				</div>
+				
+				<div class = "col-sm-7 top-header-text">
+					<h1> Hey there, Linquizt! </h1> <br/>
+					<p> Log into your profile or browse through our available quizzes. </p>
+					
+					<p class = "top-header-btn-grp"> 
+						<button class = "top-header-btn impt"  data-toggle = "modal" data-target = "#get-started"> Get Started </button> 
+						<a id = "take-quizzes-btn" href = "/quizzes"><button class = "top-header-btn plain"> Take a Quiz </button> </a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</header>
+	
+	<div class = "container-fluid even-row">
+		<div class = "row">
+			<div class = "col-sm-8 block-text">
+				<h1> Join Our Community </h1>
+				<p> Create a Linquiztics account to be able to create and publish your own quizzes, keep track of your daily streak, EXP, league and position, and customize displayed quizzes to match your preferred display languages.  </p>
+				<p class = "top-header-btn-grp"> 
+					<a href = "/createAccount"><button class = "block-btn impt"> Create an Account </button> </a>
+				</p>
+			</div>
+			
+			<div class = "col-sm-2 text-center">
+				<img class = "regular-img" src = "assets/community.png">
+			</div>
+			
+			<div class = "col-sm-2"> </div>
+		</div>
+	</div>
+	
+	<div class = "container-fluid odd-row">
+		<div class = "row">
+			<div class = "col-sm-2"> </div>
+			<div class = "col-sm-2 text-center">
+				<img class = "regular-img" src = "assets/featured.png">
+			</div>
+			
+			<div class = "col-sm-8 block-text">
+				<h1> Browse the Best and Latest </h1>
+				<p> Browse through the ten most recently published quizzes and the ten highest-rated quizzes. Create a Linquiztics account and try out a few featured quizzes to maintain your streak and gain more EXP! </p>
+				<p class = "top-header-btn-grp"> 
+					<a href = "/quizzes"><button class = "block-btn impt"> Featured Quizzes </button> </a>
+				</p>
+			</div>
+			
+			
+		</div>
+	</div>
+	
+	<div class = "container-fluid even-row">
+		<div class = "row">
+			<div class = "col-sm-8 block-text">
+				<h1> See Where Users Stack Up </h1>
+				<p> Take a look at the current leaderboard and see which leagues other users belong to. Create a Linquiztics account to join the leaderboards. Make sure to maintain a good position before the regular league evaluations!  </p>
+				<p class = "top-header-btn-grp"> 
+					<a href = "/leaderboard"><button class = "block-btn impt"> View Leaderboard </button> </a>
+				</p>
+			</div>
+			
+			<div class = "col-sm-2 text-center">
+				<img class = "regular-img" src = "assets/leaderboard.png">
+			</div>
+			
+			<div class = "col-sm-2"> </div>
+		</div>
+	</div>
+	
+{{/if}}	

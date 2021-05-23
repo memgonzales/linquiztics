@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<title> Create Account </title>
+		<link rel = "icon" type = "image/png" href = "assets/languages.png">
+		
+		<link rel = "stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+		<link rel = "stylesheet" href = "https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+		<link rel = "stylesheet" type = "text/css" href = "https://fonts.googleapis.com/css?family=Open+Sans">
+		<link rel = "stylesheet" type = "text/css" href = "styles/style.css">
+		<link rel = "stylesheet" type = "text/css" href = "styles/profile-style.css">
+		
+		<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"> </script>
+		<script src = "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"> </script>
+		<script src = "https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"> </script>
+		
+		<script src="scripts/validator.min.js" type="text/javascript"></script>
+		<script src="scripts/create-account.js" type="text/javascript"></script>
+		
+		<!-- Internal style sheet necessary to override DataTables formatting -->
+		<style>		
+			.dataTables_wrapper .dataTables_paginate .paginate_button {
+			  background: none;
+			  color: black !important;
+			  border: 0 !important;
+			}
+			
+			.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+			  background: none;
+			  color: black !important;
+			  border: 0 !important;
+			}
+
+			.dataTables_wrapper .dataTables_paginate .paginate_button:active {
+			  background: none;
+			  color: black !important;
+			  border: 0 !important;
+			}
+		</style>
+	</head>
+
+	<body id = "page-top">
+		
+		<div id = "page">
+			{{> navbar flag = flag adminflag = adminflag username = username name = name firstname = firstname}}
+			
+			<header class = "jumbotron top-header">
+				<div class = "container">
+					<div class = "row">
+						<div class = "col-sm-1"> </div>
+						<div class = "col-sm-4 text-center">
+							<img src = "assets/languages.png">
+						</div>
+						
+						<div class = "col-sm-7 top-header-text">
+							<h1> Create an Account </h1> 							
+							<p> 
+								Create an account to be able to create quizzes and rate and comment on the quizzes of other users.
+							</p>
+							
+							<p>	
+								Registered users also become part of the leaderboard.
+							</p>
+						</div>
+					</div>
+				</div>
+			</header>
+			
+			<div class = "container-fluid even-row">
+				<div class = "row">
+					<div class = "col-sm-7 block-text">
+						<br/>
+						<form id = "create-account-form" method = "post" enctype = "multipart/form-data">
+							<div class = "form-group">
+								<label for = "username">Username</label> 
+								<span id = "usernameError" class = "error-input"> {{usernameError}} </span>
+								<input id = "username" name = "username" type = "text" class = "form-control" required> 
+							</div>
+
+							<div class = "form-group">
+								<label for = "name">Name</label> 
+								<span id = "nameError" class = "error-input"> {{nameError}} </span>
+								<input id = "name" name = "name" type = "text" class = "form-control" required> 
+							</div>
+							
+							<div class = "form-group">
+								<label for = "email-address">Email Address</label>
+								<span id = "emailAddressError" class = "error-input"> {{emailAddressError}} </span>
+								<input id = "email-address" name = "email" type = "email" class = "form-control" required> 
+							</div> <br/>
+							
+							
+							<div class = "form-group">
+								<label for = "new-password"> 
+									Password
+									<span data-toggle = "tooltip" title = "Should contain 8 to 128 characters, with at least one special character, number, and capital letter" class = "glyphicon glyphicon-question-sign smaller-icon"> </span> 
+								</label>
+								<span id = "passwordError" class = "error-input"> {{passwordError}} </span>
+								<input id = "new-password" name = "newPassword" type = "password" class = "form-control" required> 
+							</div>
+							
+							<div class = "form-group">
+								<label for = "repeat-password">
+									Repeat Password
+								</label>
+								<span id = "repeatPasswordError" class = "error-input"> {{repeatPasswordError}} </span>
+								<input id = "repeat-password" name = "repeatPassword" type = "password" class = "form-control" required> 
+							</div> <br/>
+							
+							<div class = "form-group">
+								<label for = "lang-selection">
+									Display Languages 
+									<span data-toggle = "tooltip" title = "Preferred language in which quizzes are written" class = "glyphicon glyphicon-question-sign smaller-icon"> </span> 
+									<br/>(Hold <span class = "code-font">ctrl</span> for multiple languages)
+								</label>
+								<span id = "langSelectionError" class = "error-input"> {{langSelectionError}} </span>
+								<select id = "lang-selection" name = "langSelection" class = "form-control" multiple>
+									<option value = "Chinese">Chinese</option>
+									<option value = "English">English</option>
+									<option value = "Filipino">Filipino</option>
+									<option value = "German">German</option>
+									<option value = "Japanese">Japanese</option>
+								</select>
+							</div> <br/>
+							
+							<div class = "form-group">
+								<label for = "profile-picture">Upload Profile Picture (Optional)</label><br/>
+								<input id = "profile-picture" name = "profilePicture" type = "file" accept = "image/*"> 
+							</div> 
+							
+							
+							<div class = "form-group">
+								<label for = "create-account"> </label>
+								<button id = "create-account" type = "submit" class = "btn btn-default btn-success btn-block" disabled>
+									Create Account
+								</button>
+							</div>
+						</form>
+					</div>
+					
+					<div class = "col-sm-4 text-left">
+						<h1> About Linquiztics </h1>
+						<p> Linquiztics is a language learning site that allows users to take and create quizzes about a variety of languages. <br><br> 
+							Registered users can comment on and rate the quizzes of other users, view feedback on their own quizzes to improve them through the edit function, and access their streak and EXP. <br><br>
+							A user's streak is incremented when they take their first quiz of the day, and is reset when they do not take a quiz for 24 hours. After taking a quiz, users gain EXP proportional to the length of the quiz and become part of the leagues and leaderboard. <br><br>
+							At its core, Linquiztics is intended for users to share their language quizzes with one another and build positive learning habits. We hope you learn a lot and have fun! </p>
+					</div>
+					
+					<div class = "col-sm-1"> </div>
+				</div>
+			</div>
+			
+			{{> footer}}
+		</div>
+		
+		<script src = "scripts/tooltip.js"> </script>
+		<script src = "scripts/create-account.js"> </script>
+
+	</body>
+
+</html>

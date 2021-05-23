@@ -1,0 +1,36 @@
+<nav class = "navbar">
+	<div class = "container">
+		<div class = "navbar-header">
+			<button type = "button" class = "navbar-toggle" data-toggle= "collapse" data-target = "#menu">
+				<span class = "icon-bar"> </span>
+				<span class = "icon-bar"> </span>
+				<span class = "icon-bar"> </span>
+			</button>
+			<a id = "nav-logo" class = "navbar-brand" href = "/">  <img src = "../../assets/languages.png"> Linquiztics </a>
+		</div>
+		
+		<div id = "menu" class = "collapse navbar-collapse">
+			<ul class = "nav navbar-nav navbar-right">
+				<li> <a href = "/quizzes"> Quizzes </a> </li>
+				<li> <a href = "/leaderboard"> Leaderboard </a> </li>
+				<li>
+				{{#if flag}}
+					{{#if adminflag}}
+						<a onclick = "showSidebar()"> 
+							<span id = "hello">Site Admin</span> &nbsp; &nbsp; &nbsp; <span class = "glyphicon glyphicon-wrench"> </span> 
+						</a> 
+					{{else}}
+						<a onclick = "showSidebar()"> 
+							<span id = "hello">Hello, {{firstname}}!</span> &nbsp; &nbsp; &nbsp; <span class = "glyphicon glyphicon-user"> </span> 
+						</a> 	
+					{{/if}}							
+				{{else}}
+					<a href = "/login"> 
+						<span id = "hello">Log In</span> &nbsp; &nbsp; &nbsp; <span class = "glyphicon glyphicon-user"> </span> 
+					</a> 
+				{{/if}}
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav>

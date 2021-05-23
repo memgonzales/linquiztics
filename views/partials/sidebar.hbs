@@ -1,0 +1,80 @@
+{{#if flag}}
+
+	{{#if adminflag}}
+		<div class = "container">
+			<p class = "close-x">
+				<a onclick = "hideSidebar()" class = "pointable"> &times; </a>
+			</p>
+		
+			<p id = "side-bar-avatar-container">
+				<img id = "side-bar-avatar" src = "{{{picture}}}">
+			</p>
+			
+			<div id = "side-bar-name-container">
+				<p> 
+					<h2> Linquiztics Administrator </h2> </a> 
+				</p>
+				
+				<hr/>
+				<h4> <span class = "glyphicon glyphicon-wrench left-float"> </span> <a href = "/admin"> Admin Page </a> </h4>
+				<h4> <span class = "glyphicon glyphicon-log-out left-float"> </span> <a href = "/logout"> Log Out </a> </h4>
+			</div>	
+		</div>
+
+	{{else}}
+
+		<div class = "container">
+			<p class = "close-x">
+				<a onclick = "hideSidebar()" class = "pointable"> &times; </a>
+			</p>
+
+			<p id = "side-bar-avatar-container">
+				<img id = "side-bar-avatar" src = "{{{picture}}}">
+			</p>
+			
+			<div id = "side-bar-name-container">
+				<p> 
+					<h2 id = "side-bar-name word-wrapped"> {{name}} </h2> </a> 
+				</p>
+				
+				<p>
+					<span class = "code-font word-wrapped"> {{username}} </span>
+				
+					<table>
+						<tr>
+							<td> Streak </td>
+							<td> {{streak}} &nbsp; &nbsp; <span class = "glyphicon glyphicon-fire"> </span> </td>
+						</tr>
+						
+						<tr>
+							<td> Exp </td>
+							<td> {{exp}} </td>
+						</tr>
+						
+						<tr>
+							<td> League </td>
+							<td> {{league}} </td>
+						</tr>
+						
+						<tr>
+							<td> Position </td>
+							<td> {{position}} </td>
+						</tr>
+								
+					</table>
+				</p>
+				
+				<hr/>
+
+				<h4> <span class = "glyphicon glyphicon-user left-float"> </span> <a href = "/myProfile/{{username}}"> My Profile </a> </h4>
+				<h4> <span class = "glyphicon glyphicon-list-alt left-float"> </span> <a href = "/myQuizzes"> My Quizzes </a> </h4>
+				
+				<hr/>
+				
+				<h4> <span class = "glyphicon glyphicon-log-out left-float"> </span> <a href = "/logout"> Log Out </a> </h4>
+			</div>	
+		</div>
+
+	{{/if}}
+
+{{/if}}

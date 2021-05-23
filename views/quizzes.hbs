@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<title> Quizzes </title>
+		<link rel = "icon" type = "image/png" href = "../assets/languages.png">
+		
+		<link rel = "stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+		<link rel = "stylesheet" href = "https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+		<link rel = "stylesheet" type = "text/css" href = "https://fonts.googleapis.com/css?family=Open+Sans">
+		<link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel = "stylesheet" type = "text/css" href = "../styles/style.css">
+		<link rel = "stylesheet" type = "text/css" href = "../styles/leaderboard-style.css">
+		
+		<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"> </script>
+		<script src = "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"> </script>
+		<script src = "https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"> </script>
+		
+		<!-- Internal style sheet necessary to override DataTables formatting -->
+		<style>		
+			.dataTables_wrapper .dataTables_paginate .paginate_button {
+			  background: none;
+			  color: black !important;
+			  border: 0 !important;
+			}
+			
+			.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+			  background: none;
+			  color: black !important;
+			  border: 0 !important;
+			}
+
+			.dataTables_wrapper .dataTables_paginate .paginate_button:active {
+			  background: none;
+			  color: black !important;
+			  border: 0 !important;
+			}
+		</style>
+	</head>
+
+	<body id = "page-top">
+		<div id = "side-bar">
+			{{> sidebar flag = flag adminflag = adminflag username = username name = name picture = picture streak = streak exp = exp league = league position = position}}
+		</div>
+
+		<div id = "page">
+			{{> navbar flag = flag adminflag = adminflag username = username name = name}}
+		
+			<header class = "jumbotron top-header">
+				<div class = "container">
+					<div class = "row">
+						<div class = "col-sm-1"> </div>
+						<div class = "col-sm-4 text-center">
+							<img src = "../assets/languages.png">
+						</div>
+						
+						<div class = "col-sm-7 top-header-text">
+							<h1> Featured Quizzes </h1> 							
+							<p> 
+								See the top three highest rated quizzes matching your display languages and the top three most recently published quizzes.
+							</p>
+							
+							<p>	
+								Browse or search for a quiz using the complete quiz list.
+							</p>
+						</div>
+					</div>
+				</div>
+			</header>
+			
+			<div class = "container-fluid even-row reduced-spacing">		
+				<div class = "row text-center">
+					<h1>Top Rated Quizzes</h1>
+				</div> <br/>
+			
+				<div class = "row">
+					
+					<div class = "col-sm-4 text-center">
+						<img class = "leaderboard-avatar" src = "{{{topRatingPics.[0]}}}">
+						<a class = "username" href = "/quizTeaser/{{{topRating.[0].idNum}}}" target = "_blank"><h2> {{topRating.[0].title}} </h2></a>
+						<h4 class = "code-font"> {{topRatingTags.[0]}} </h4>
+					</div>
+
+					<div class = "col-sm-4 text-center left-end">
+						<img class = "leaderboard-avatar" src = "{{{topRatingPics.[1]}}}">
+						<a class = "username" href = "/quizTeaser/{{{topRating.[1].idNum}}}" target = "_blank"><h2> {{topRating.[1].title}} </h2></a>
+						<h4 class = "code-font"> {{topRatingTags.[1]}} </h4>
+					</div>
+					
+					<div class = "col-sm-4 text-center right-end">
+						<img class = "leaderboard-avatar" src = "{{{topRatingPics.[2]}}}">
+						<a class = "username" href = "/quizTeaser/{{{topRating.[2].idNum}}}" target = "_blank"><h2> {{topRating.[2].title}} </h2></a>
+						<h4 class = "code-font"> {{topRatingTags.[2]}} </h4>
+					</div>
+				</div>
+			</div>
+			
+			<div class = "container-fluid odd-row reduced-spacing">
+				<div class = "row text-center">
+					<h1>Recently Published Quizzes</h1>
+				</div> <br/>
+			
+				<div class = "row">
+					<div class = "col-sm-4 text-center left-end">
+						<img class = "leaderboard-avatar" src = "{{{topDatePics.[0]}}}">
+						<a class = "username" href = "/quizTeaser/{{{topDate.[0].idNum}}}" target = "_blank"><h2> {{topDate.[0].title}} </h2></a>
+						<h4 class = "code-font"> {{topDateTags.[0]}} </h4>
+					</div>
+					
+					<div class = "col-sm-4 text-center">
+						<img class = "leaderboard-avatar" src = "{{{topDatePics.[1]}}}">
+						<a class = "username" href = "/quizTeaser/{{{topDate.[1].idNum}}}" target = "_blank"><h2> {{topDate.[1].title}} </h2></a>
+						<h4 class = "code-font"> {{topDateTags.[1]}} </h4>
+					</div>
+					
+					<div class = "col-sm-4 text-center right-end">
+						<img class = "leaderboard-avatar" src = "{{{topDatePics.[2]}}}">
+						<a class = "username" href = "/quizTeaser/{{{topDate.[2].idNum}}}" target = "_blank"><h2> {{topDate.[2].title}} </h2></a>
+						<h4 class = "code-font"> {{topDateTags.[2]}} </h4>
+					</div>
+				</div>
+			</div>
+			
+			<div class = "container-fluid even-row">		
+				<div class = "row text-center">
+					<h2>Complete Quiz List</h2>
+				</div> <br/>
+			
+				<div class = "row block-text">
+					<div class = "container-fluid">
+							<table id = "complete-quiz-list" class = "table table-hover table-responsive" data-page-length = "5">
+								<thead>
+									<tr>
+										<th> Date Published </th>
+										<th> Quiz Name </th>
+										<th> Creator </th>
+										<th> Rating </th>
+										<th> Tags </th>
+									</tr>
+								</thead>
+								
+								<tbody>
+									{{#each allQuizzes}}
+									<tr>
+										<td> {{lookup ../allDates @index}} </td>
+										<td> <a class = "quiz-names" href = "/quizTeaser/{{{this.idNum}}}" target = "_blank"> {{this.title}} </a> </td>
+										<td class = "code-font"> <a class = "quiz-names" href = "/publicProfile/{{{this.author}}}" target = "_blank">{{this.author}} </a> </td>
+										<td> {{lookup ../allRates @index}} </td>
+										<td> {{lookup ../allTags @index}} </td>
+									</tr>
+									{{/each}}
+								</tbody>
+							</table>
+						</div>
+				</div>
+			</div>
+			
+			{{> footer}}
+			
+		</div>
+
+		<script src = "../scripts/featured-quizzes.js"> </script>
+		<script src = "../scripts/sidebar.js"> </script>
+	</body>
+
+</html>

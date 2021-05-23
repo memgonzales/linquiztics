@@ -1,0 +1,77 @@
+.leaderboard-avatar {
+	width: 150px;
+	height: 150px;
+	border-radius: 100%;
+	padding: 2px;
+	border: 2px solid var(--header-color);
+}
+
+.leaderboard-avatar:hover {
+	opacity: 0.7;
+}
+
+.username , .username:hover, .username:active, .username:visited {
+	color: inherit !important;
+	text-decoration: none !important;
+}
+
+.nav-tabs {
+	border-bottom: 2px solid var(--header-color);
+}
+
+.nav-tabs li a {
+	color: inherit;
+	border-radius: 15px 15px 0 0;
+}
+
+.nav-tabs li a, .nav-tabs li a:hover, .nav-tabs li a:active, .nav-tabs li a:visited  {
+	border: 0;
+}
+
+.nav-tabs li a:hover {
+	background-color: var(--impt-btn-color);
+}
+
+.nav-tabs li.active a, .nav-tabs li.active a:hover, .nav-tabs li.active a:visited, .nav-tabs li.active a:active {
+	background-color: var(--header-color) !important;
+	color: white !important;
+}
+
+.quiz-names {
+	color: inherit !important;
+}
+
+.quiz-names:active {
+	color: inherit !important;
+}
+
+.quiz-names:hover {
+	color: inherit !important;
+}
+
+.reduced-spacing {
+	padding-left: 7%;
+	padding-right: 7%;
+}
+
+.leaderboard-table tr th {
+	border-bottom: 1px solid var(--header-color) !important;
+}
+
+.leaderboard-table tbody tr:hover td {
+	background-color: var(--impt-btn-color);
+}
+
+#complete-quiz-list tbody tr td {
+	background-color: var(--even-color);
+}
+
+#complete-quiz-list tbody tr:hover td {
+	background-color: var(--odd-color);
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+	background-color: var(--odd-color) !important;
+}
+
+

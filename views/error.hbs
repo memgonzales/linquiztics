@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Page Not Found </title>
+    <link rel = "stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<link rel = "stylesheet" type = "text/css" href = "https://fonts.googleapis.com/css?family=Open+Sans">
+	<link rel = "stylesheet" type = "text/css" href = "../styles/style.css">
+		
+	<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"> </script>
+	<script src = "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"> </script>
+</head>
+
+<body id = "page-top">
+	<div id = "side-bar">
+		{{> sidebar flag = flag adminflag = adminflag username = username name = name picture = picture streak = streak exp = exp league = league position = position}}
+	</div>
+	
+	<div id = "page">
+		{{> navbar flag = flag adminflag = adminflag username = username name = name firstname = firstname}}
+		
+		<div id="container">
+			<div id="error404" class = "container-fluid text-left">
+				<div class = "row">
+					<div class = "col-sm-6">
+						<h1 id="title"> 404 </h1>
+						<p> Sorry, page not found </p>
+						<p> Paumanhin, hindi matagpuan ang hinahanap na pahina </p>
+						<p> 抱歉，找不到文件 </p>
+						<p> 申し訳ありませんが、ページが見つかりません </p>
+						<p> Entschuldigung, Seite nicht gefunden </p>
+					</div>
+					
+					<div class = "col-sm-6">
+						<img id = "error404-icon" src = "../assets/error404.PNG">
+					</div>
+				</div>
+			</div>
+		
+		<div id = "footer-error404">
+		{{> footer}}
+		</div>
+	</div>
+
+	<script src = "../scripts/sidebar.js"> </script>
+</body>
+</html>

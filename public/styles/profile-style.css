@@ -1,0 +1,74 @@
+.quiz-names {
+	color: inherit !important;
+}
+
+.quiz-names:active {
+	color: inherit !important;
+}
+
+.quiz-names:hover {
+	color: inherit !important;
+}
+
+.profile-avatar-img {
+	width: 200px;
+	height: 200px;
+	border: 6px solid var(--header-color);
+	padding: 2px;
+	border-radius: 100%;
+}
+
+.profile-avatar-img:hover {
+	opacity: 0;
+}
+
+#container-for-overlay {
+	width: 200px;
+	height: 200px;
+	border-radius: 100%;
+	display: flex;
+	overflow: hidden;
+	position: relative;
+	margin-top: 80px;
+}
+
+#overlay {
+	z-index: 1;
+	display: flex;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	align-items: center;
+	justify-content: center;
+	opacity: 0;
+	transition: opacity 0.25s;
+	background-color: var(--header-color);
+	color: white;
+}
+
+#overlay:hover {
+	opacity: 0.75;
+}
+
+#profile-picture-upload {
+	display: none;
+}
+
+.leaderboard-icons {
+	width: 100px;
+	height: 100px;
+}
+
+#history-quizzes tbody tr td {
+	background-color: var(--even-color);
+}
+
+#history-quizzes tbody tr:hover td {
+	background-color: var(--odd-color);
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+	background-color: var(--odd-color) !important;
+}
