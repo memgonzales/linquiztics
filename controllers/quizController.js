@@ -218,8 +218,11 @@ const quizController = {
 			
 			else {
 				if(req.session.username == undefined) {
-                    details.flag = false;
-                    details.adminflag = false;
+                    var details = {
+                    	flag: false,
+                    	adminflag: false
+                    };
+
                     res.render('error', details);
                 }
 
@@ -532,8 +535,11 @@ const quizController = {
 			
 			else {
 				if(req.session.username == undefined) {
-                    details.flag = false;
-                    details.adminflag = false;
+                    var details = {
+                    	flag: false,
+                    	adminflag: false
+                    };
+
                     res.render('error', details);
                 }
 
@@ -927,8 +933,11 @@ const quizController = {
 			
 			else {
 				if(req.session.username == undefined) {
-                    details.flag = false;
-                    details.adminflag = false;
+                    var details = {
+                    	flag: false,
+                    	adminflag: false
+                    };
+
                     res.render('error', details);
                 }
 
@@ -1869,12 +1878,13 @@ const quizController = {
 					var lastDate = result.lastActive;
 					var diffTime = Math.abs(currDate - lastDate);
 					var diffDays = diffTime / (1000 * 60 * 60 * 24);
-					result.lastActive = currDate;
 
 					if (diffDays > 2)
 						result.streak = 1;
-					else if (diffDays > 1 && diffDays <= 2)
+					else if (diffDays > 1 && diffDays <= 2) {
 						result.streak = result.streak + 1;
+						result.lastActive = currDate;
+					}
 
 					var filterSingle = {username: req.session.username};
 					var updateSingle = {
@@ -2011,7 +2021,6 @@ const quizController = {
 	},
 
 	postReportComment: function(req, res) {
-		console.log(req.body);
 		var reason = req.body.commentReport;
 		var idNum = req.body.reportIdnum;
 		var title = req.body.reportQuizname;

@@ -153,8 +153,11 @@ const profileController = {
 
             else {
                 if(req.session.username == undefined) {
-                    details.flag = false;
-                    details.adminflag = false;
+                    var details = {
+                        flag: false,
+                        adminflag: false
+                    };
+
                     res.render('error', details);
                 }
 
@@ -337,8 +340,11 @@ const profileController = {
 
             else {
                 if(req.session.username == undefined) {
-                    details.flag = false;
-                    details.adminflag = false;
+                    var details = {
+                        flag: false,
+                        adminflag: false
+                    };
+
                     res.render('error', details);
                 }
 
@@ -675,8 +681,11 @@ const profileController = {
         }
 
         else if (req.session.username == undefined) {
-            details.flag = false;
-            details.adminflag = false;
+            var details = {
+                flag: false,
+                adminflag: false
+            };
+            
             res.render('error', details);
         }
 
