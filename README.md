@@ -16,23 +16,23 @@ This project consists of the following folders:
 
 | Folder | Description |
 | --- | --- |
-| <code>controllers</code> | Contains the JavaScript files that define callback functions for client-side requests |
-| <code>helpers</code> | Contains the JavaScript files that define helper functions for front-end display and server-side validation | 
-| <code>misc</code> | Contains the JavaScript files for initial database population |
-| <code>models</code> | Contains the JavaScript files for database modeling and access | 
-| <code>public</code> | Contains the static CSS and JavaScript files, as well as the project assets (images and audio files), for front-end display |
-| <code>routes</code> | Contains the JavaScript file that defines the server response to each HTTP method request |
-| <code>views</code> | Contains the Handlebars template files to be rendered and displayed upon request |
+| <a href = "https://github.com/memgonzales/linquiztics/tree/master/controllers"><code>controllers</code></a> | Contains the JavaScript files that define callback functions for client-side requests |
+| <a href = "https://github.com/memgonzales/linquiztics/tree/master/helpers"><code>helpers</code> | Contains the JavaScript files that define helper functions for front-end display and server-side validation | 
+| <a href = "https://github.com/memgonzales/linquiztics/tree/master/misc"><code>misc</code></a> | Contains the JavaScript files for initial database population |
+| <a href = "https://github.com/memgonzales/linquiztics/tree/master/models"><code>models</code></a> | Contains the JavaScript files for database modeling and access | 
+| <a href = "https://github.com/memgonzales/linquiztics/tree/master/public"><code>public</code></a> | Contains the static CSS and JavaScript files, as well as the project assets (images and audio files), for front-end display |
+| <a href = "https://github.com/memgonzales/linquiztics/tree/master/routes"><code>routes</code></a> | Contains the JavaScript file that defines the server response to each HTTP method request |
+| <a href = "https://github.com/memgonzales/linquiztics/tree/master/views"><code>views</code></a> | Contains the Handlebars template files to be rendered and displayed upon request |
 
 It also includes the following files:
 
 | File | Description |
 | --- | --- |
-| <code>.env</code> | Contains the working environment variables |
-| <code>package-lock.json</code> and <code>package.json</code> | Store information on the project dependencies |
-| <code>index.js</code> | Entry point of the web application |
+| <a href = "https://github.com/memgonzales/linquiztics/blob/master/.env"><code>.env</code></a> | Contains the working environment variables |
+| <a href = "https://github.com/memgonzales/linquiztics/blob/master/package-lock.json"><code>package-lock.json</code></a> and <a href = "https://github.com/memgonzales/linquiztics/blob/master/package.json"><code>package.json</code></a> | Store information on the project dependencies |
+| <a href = "https://github.com/memgonzales/linquiztics/blob/master/index.js"><code>index.js</code></a> | Entry point of the web application |
 
-The complete project specifications can be found in the file <code>Proposed Specifications.pdf</code>.
+The complete project specifications can be found in the file <a href = "https://github.com/memgonzales/linquiztics/blob/master/Proposed%20Specifications.pdf"><code>Proposed Specifications.pdf</code></a>.
 
 ## Running the Application
 ### Running on the Web
@@ -86,24 +86,24 @@ Open the following website: http://linquiztics.herokuapp.com.
    Database population complete! Press Ctrl + C to continue.
    ```
 
-5. On the main project directory, run the following command:
+5. On the main project directory, run the following command to populate the database with **quizzes**:
    ```
    node misc/add_quiz_data.js
    ```
    
-   This will populate the database with quizzes. If the command is executed successfully, the following will be printed on the terminal (the assigned <code>_id</code> may vary):
+   If the command is executed successfully, the following will be printed on the terminal (the assigned <code>_id</code> may vary):
 
    ```
    Added {
        tags: [ 'animals', 'basic', 'German', 'introductory', 'vocabulary' ],
        subjectLanguages: [ 'German' ],
        ratings: [
-         5, 5, 5, 5, 4,
-         5, 5, 3, 1, 5
+           5, 5, 5, 5, 4,
+           5, 5, 3, 1, 5
        ],
        accuracies: [
-         100, 100, 86, 86, 71,
-         71, 57, 43, 29
+           100, 100, 86, 86, 71,
+           71, 57, 43, 29
        ],
        _id: 60a9556188b8f82cdc92368d,
        idNum: 1,
@@ -115,19 +115,100 @@ Open the following website: http://linquiztics.herokuapp.com.
    Database population complete! Press Ctrl + C to continue.
    ```
    
-6. On the main project directory, run the following command to **run the server**: 
+6. On the main project directory, run the following command to populate the database with **reported users**:
+   ```
+   node misc/add_userreport_data.js
+   ```
+   
+   If the command is executed successfully, the following will be printed on the terminal (the assigned <code>_id</code> may vary):
+
+   ```
+   Added {
+       _id: 60a959da39ac9f0c7cc6fa94,
+       index: 1,
+       name: 'Benny Terrier',
+       username: 'bulljanai',
+       reportDate: 2021-03-28T00:00:00.000Z,
+       report: 'Hate speech',
+       __v: 0
+       
+   [... truncated ...]
+   
+   Database population complete! Press Ctrl + C to continue.
+   ```
+   
+7. On the main project directory, run the following command to populate the database with **reported quizzes**:
+   ```
+   node misc/add_quizreport_data.js
+   ```
+   
+   If the command is executed successfully, the following will be printed on the terminal (the assigned <code>_id</code> may vary):
+
+   ```
+   Added {
+       _id: 60a959f76ea1853bf06ced89,
+       index: 1,
+       quizNum: 3,
+       title: 'Conyo 101',
+       author: 'danccgabe',
+       reportDate: 2021-03-31T00:00:00.000Z,
+       report: 'Hate speech',
+       __v: 0
+       
+   [... truncated ...]
+   
+   Database population complete! Press Ctrl + C to continue.
+   ```
+   
+8. On the main project directory, run the following command to populate the database with **reported comments**:
+   ```
+   node misc/add_commentreport_data.js
+   ```
+   
+   If the command is executed successfully, the following will be printed on the terminal:
+
+   ```
+   Added {
+       _id: 60a960ec6bc1dc3340e1d967,
+       index: 12,
+       commentNum: 21001,
+       quizNum: 2,
+       comment: 'Not beginner-friendly, but very cool :)',
+       author: 'japashiba',
+       quiz: 'Anime Quotes',
+       reportDate: 2021-05-22T19:52:12.556z,
+       report: 'Inappropriate content',
+       __v: 0
+       
+   [... truncated ...]
+   
+   Database population complete! Press Ctrl + C to continue.
+   ```
+  
+   
+9. On the main project directory, run the following command to **run the server**: 
    ```
    node index.js
    ```
 
    If the command is executed successfully, the following will be displayed on the terminal:
    
-7. Open the web application by accessing the following link on a browser:
-   ```
-   http://localhost:3000
+    ```
+   app listening at port 3000
+   Connected to: mongodb+srv://admin:admin@linquiztics.ndejq.mongodb.net/linquiztics?retryWrites=true&w=majority
    ```
    
+   
+ 10. Open the web application by accessing the following link on a browser:
+     ```
+     http://localhost:3000
+     ```
+   
 ### Administrator Credentials  
+To log in as an administrator, go to the <a href = "https://linquiztics.herokuapp.com/login">Login</a> page and enter the following credentials:
+   - Username: <code>linquizticsadmin</code>
+   - Password: <code>ASDFGHJKL123;</code>
+   
 
 
 
@@ -172,4 +253,4 @@ This project uses the following dependencies, which can be installed via the <co
   
 For queries or concerns related to the Linquiztics project, kindly email linquiztics.webmaster@gmail.com.
   
-Assets (images and audio files) are properties of their respective owners. Attribution is found in the file <code>public/assets/credits.txt</code> and displayed publicly on the <code>credits</code> page.
+Assets (images and audio files) are properties of their respective owners. Attribution is found in the file <a href = "https://github.com/memgonzales/linquiztics/blob/master/public/assets/credits.txt"><code>public/assets/credits.txt</code></a> and displayed publicly on the <a href = "http://linquiztics.herokuapp.com/credits">Credits</a> page.
