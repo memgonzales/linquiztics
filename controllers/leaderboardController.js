@@ -8,85 +8,58 @@ const leaderboardController = {
 
 		db.findMany(Profile, {}, projection, function(result) {
 			if (result != null) {
-
-				var i;
-				var allUsers = [];
-				var topUsers = [];
 				var diamondUsers = [];
 				var platinumUsers = [];
 				var goldUsers = [];
 				var silverUsers = [];
 				var bronzeUsers = [];
+				var topUsers = [];
 
-				allUsers = result;
+				var newDocuments = result;
 
-				for (i = 0; i < allUsers.length; i++) {
-					if (allUsers[i].league == 'Diamond') 
-						diamondUsers.push(allUsers[i]);
-					else if (allUsers[i].league == 'Platinum') 
-						platinumUsers.push(allUsers[i]);
-					if (allUsers[i].league == 'Gold') 
-						goldUsers.push(allUsers[i]);
-					if (allUsers[i].league == 'Silver') 
-						silverUsers.push(allUsers[i]);
-					if (allUsers[i].league == 'Bronze') 
-						bronzeUsers.push(allUsers[i]);
+				newDocuments.sort(function (a, b) {
+					var keyA = new Date(a.exp);
+					var keyB = new Date(b.exp);
+
+					if (keyA < keyB)
+						return 1;
+					if (keyA > keyB)
+						return -1;
+					return 0;
+				});
+
+				var i;
+
+				for (i = 0; i < 5 && i < newDocuments.length; i++) {
+					newDocuments[i].league = "Diamond";
+					newDocuments[i].position = i + 1;
+					diamondUsers.push(newDocuments[i]);
 				}
 
-				diamondUsers.sort(function(a, b) {
-					var keyA = a.exp;
-					var keyB = b.exp;
+				for (i = 5; i < 10 && i < newDocuments.length; i++) {
+					newDocuments[i].league = "Platinum";
+					newDocuments[i].position = i - 4;
+					platinumUsers.push(newDocuments[i]);
+				}
 
-					if (keyA < keyB)
-						return 1;
-					if (keyA > keyB)
-						return -1;
-					return 0;
-				});
+				for (i = 10; i < 15 && i < newDocuments.length; i++) {
+					newDocuments[i].league = "Gold";
+					newDocuments[i].position = i - 9;
+					goldUsers.push(newDocuments[i]);
+				}
 
-				platinumUsers.sort(function(a, b) {
-					var keyA = a.exp;
-					var keyB = b.exp;
+				for (i = 15; i < 20 && i < newDocuments.length; i++) {
+					newDocuments[i].league = "Silver";
+					newDocuments[i].position = i - 14;
+					silverUsers.push(newDocuments[i]);
+				}
 
-					if (keyA < keyB)
-						return 1;
-					if (keyA > keyB)
-						return -1;
-					return 0;
-				});
+				for (i = 20; i < newDocuments.length; i++) {
+					newDocuments[i].league = "Bronze";
+					newDocuments[i].position = i - 19;
+					bronzeUsers.push(newDocuments[i]);
+				}
 
-				goldUsers.sort(function(a, b) {
-					var keyA = a.exp;
-					var keyB = b.exp;
-
-					if (keyA < keyB)
-						return 1;
-					if (keyA > keyB)
-						return -1;
-					return 0;
-				});
-
-				silverUsers.sort(function(a, b) {
-					var keyA = a.exp;
-					var keyB = b.exp;
-
-					if (keyA < keyB)
-						return 1;
-					if (keyA > keyB)
-						return -1;
-					return 0;
-				});
-
-				bronzeUsers.sort(function(a, b) {
-					var keyA = a.exp;
-					var keyB = b.exp;
-
-					if (keyA < keyB)
-						return 1;
-					if (keyA > keyB)
-						return -1;
-					return 0;
-				});
 
 				for (i = 0; i < 3; i++) {
 					topUsers.push(diamondUsers[i]);
