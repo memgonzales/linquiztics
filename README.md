@@ -3,7 +3,7 @@ Linquiztics &mdash; a play on <i>linguistics</i> and <i>quiz</i> &mdash; is a la
 
 The deployed website can be accessed through this link: http://linquiztics.herokuapp.com.
 
-#### *Kindly enter a valid email address during the creation of an account. The web application will send an email to this registered email address after the account has been created and in the event of a password change.*
+***Kindly enter a valid email address during the creation of an account. The web application will send an email to this registered email address after the account has been created and in the event of a password change.***
 
 ## Task
 **Linquiztics** is the major course output in a web development class. The students are tasked to create a web application of their choice, provided that it satisfies the minimum requirement of supporting the following operations: <i>log in, log out, register, CRUD (create, read, update, and delete),</i> and <i>search</i>. The application development is divided into three phases:
@@ -64,7 +64,8 @@ Open the following website: http://linquiztics.herokuapp.com.
 
    If the command is executed successfully, the dependencies will be installed into the folder <code>node_modules</code> following the dependency tree found in <code>package-lock.json</code>.
 
-#### *THE PROJECT USES A PRE-POPULATED REMOTE DATABASE. Do steps 4 to 8 only after a database reset or migration to a local database.*
+###
+   ***The project uses a pre-populated remote database. Do steps 4 to 8 only after a database reset or migration to a local database.***
 
 4. On the main project directory, run the following command to populate the database with **user accounts**: 
 
