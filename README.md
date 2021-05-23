@@ -79,10 +79,10 @@ Open the following website: http://linquiztics.herokuapp.com.
        displayLanguages: [ 'English', 'Filipino' ],
        quizzesCreated: [ 2, 6 ],
        _id: 60a32d4fafac3e1430152ae4,
-       name: 'Jace Gianina Yuchengco',
+       name: 'Gianina Yuchengco',
        picture: '../assets/doggo.jpg',
-       username: 'jacegyuchengco',
-       email: 'jacegyuchengco@gmail.com' 
+       username: 'gianinayuchengco',
+       email: 'gianinayuchengco@gmail.com' 
        
    [... truncated ...]
    
