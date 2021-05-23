@@ -204,7 +204,7 @@ const quizController = {
 										bodies: bodies
 									}
 								}
-								
+
 								res.render('quizTeaser', quiz);
 							}
 						});

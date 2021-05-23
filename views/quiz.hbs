@@ -200,7 +200,7 @@
 						
 						{{else}}
 							{{#if (lookup ../commentAuthorNames @index)}}
-							{{#if sessionflag}}
+							{{#if ../sessionflag}}
 							<div id = "new-comment-space-{{{this}}}" class = "row comment-space">
 								<div class = "col-sm-2 block-text">
 									<img class = "comment-avatar" src = "{{{lookup ../commentAuthorPictures @index}}}">
