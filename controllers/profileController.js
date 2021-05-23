@@ -539,10 +539,60 @@ const profileController = {
                         var pcondition = {username: req.session.username};
 						
                         db.deleteOne(Profile, pcondition, function(error, result) {
-                            req.session.destroy(function(err) {								
-                                if (err) throw err;
-                                res.status(200).send();
-                            });
+                            var queryAll = {};
+                            var projectionAll = 'displayLanguages quizzesCreated name picture username email password streak exp league position quizzesTaken lastActive';
+                            
+                            db.findMany(Profile, queryAll, projectionAll, function(result) {
+                                var newDocuments = result;
+                                newDocuments.sort(function (a, b) {
+                                    var keyA = new Date(a.exp);
+                                    var keyB = new Date(b.exp);
+
+                                    if (keyA < keyB)
+                                        return 1;
+                                    if (keyA > keyB)
+                                        return -1;
+                                    return 0;
+                                });
+
+                                var i;
+
+                                for (i = 0; i < 5 || i < newDocuments.length; i++) {
+                                    newDocuments[i].league = "Diamond";
+                                    newDocuments[i].position = i + 1;
+                                }
+
+                                for (i = 5; i < 10 || i < newDocuments.length; i++) {
+                                    newDocuments[i].league = "Platinum";
+                                    newDocuments[i].position = i - 4;
+                                }
+
+                                for (i = 10; i < 15 || i < newDocuments.length; i++) {
+                                    newDocuments[i].league = "Gold";
+                                    newDocuments[i].position = i - 9;
+                                }
+
+                                for (i = 15; i < 20 || i < newDocuments.length; i++) {
+                                    newDocuments[i].league = "Silver";
+                                    newDocuments[i].position = i - 14;
+                                }
+
+                                for (i = 20; i < newDocuments.length; i++) {
+                                    newDocuments[i].league = "Bronze";
+                                    newDocuments[i].position = i - 19;
+                                }
+
+                                var condition = {exp: {$gte: 0}};
+
+                                db.deleteMany(Profile, condition, function(err, result) {
+                                    db.insertMany(Profile, newDocuments, function(err, result) {
+                                        req.session.destroy(function(err) {                             
+                                            if (err) throw err;
+                                            res.status(200).send();
+                                        });
+                                    });
+                                });
+                            });        
                         });
                     });
                 });
