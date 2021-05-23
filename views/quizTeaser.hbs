@@ -118,6 +118,11 @@
 												<a id = "report-status-{{{this}}}" class = "report pointable" data-toggle = "modal" data-target = "#report-comment-{{{this}}}" onclick = "fetchCommentData({{{this}}})">Report comment</a> &nbsp; 
 												<a id = "report-icon-{{{this}}}" class = "report pointable" data-toggle = "modal" data-target = "#report-comment-{{{this}}}"><span class = "glyphicon glyphicon-flag" onclick = "fetchCommentData({{{this}}})"> </span></a>
 											</h6>
+											{{else}}
+											<h6> 
+												{{lookup ../datesPosted @index}}
+											</h6>
+											{{/if}}
 											
 											<p id = "report-body-{{{this}}}"> {{lookup ../bodies @index}} </p>
 										</div>
