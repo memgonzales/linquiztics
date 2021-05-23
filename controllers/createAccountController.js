@@ -59,7 +59,7 @@ const createAccountController = {
                     email: email,
                     password: hash,
                     displayLanguages: display,
-                    streak: 0,
+                    streak: 1,
                     exp: 0,
                     league: 'Bronze',
                     position: 0,
