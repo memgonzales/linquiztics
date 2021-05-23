@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<title> My Quizzes </title>
+		<link rel = "icon" type = "image/png" href = "../assets/languages.png">
+		
+		<link rel = "stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+		<link rel = "stylesheet" href = "https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+		<link rel = "stylesheet" type = "text/css" href = "https://fonts.googleapis.com/css?family=Open+Sans">
+		<link rel = "stylesheet" type = "text/css" href = "../styles/style.css">
+		<link rel = "stylesheet" type = "text/css" href = "../styles/profile-style.css">
+		<link rel = "stylesheet" type = "text/css" href = "../styles/my-quizzes-style.css">
+		
+		<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"> </script>
+		<script src = "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"> </script>
+		<script src = "https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"> </script>
+		
+		<!-- Internal style sheet necessary to override DataTables formatting -->
+		<style>		
+			.dataTables_wrapper .dataTables_paginate .paginate_button {
+			  background: none;
+			  color: black !important;
+			  border: 0 !important;
+			}
+			
+			.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+			  background: none;
+			  color: black !important;
+			  border: 0 !important;
+			}
+
+			.dataTables_wrapper .dataTables_paginate .paginate_button:active {
+			  background: none;
+			  color: black !important;
+			  border: 0 !important;
+			}
+		</style>
+	</head>
+
+	<body id = "page-top">
+		<div id = "side-bar">
+			{{> sidebar flag = flag adminflag = adminflag username = username name = name picture = picture streak = streak exp = exp league = league position = position}}
+		</div>
+		
+		<div id = "page">
+			{{> navbar flag = flag adminflag = adminflag username = username name = name firstname = firstname}}
+			
+			<div class = "container-fluid even-row header-row">
+				<div class = "row">
+					<div class = "col-sm-8 block-text">
+						<h1> Create Your Own Quizzes </h1> <br/>
+						
+						<div class = "container-fluid">
+							<div class = "row">
+								<div class = "col-sm-12 text-left"> 
+									<h4 class = "detail-title">Guidelines</h4> 
+									<p>Create your own quizzes covering any of our five supported languages. Quiz items are multiple choice questions with four choices each. Photos and audio files can also be added to the quiz questions. </p>
+									
+									<p>Once your quiz is complete, publish it to make it available for other users. Continue to improve your quiz using the edit function as you receive user feedback.</p> <br/>
+									
+									<p>
+										<form id = "create-quiz-form" method = "post" action = "/createQuiz">
+										<input id = "author" type = "hidden" name = "author" value = "{{{username}}}">
+										<button class = "block-btn impt" type = "submit"> Create a Quiz
+										</button>
+										</form>
+									</p>
+								</div>
+							</div>
+						</div> <br/>
+					</div>
+					
+					<div class = "col-sm-4 text-center">
+						<div id = "container-for-overlay">
+							<div id = "overlay">
+							</div>
+							
+							<img id = "profile-picture" class = "profile-avatar-img" src = "{{{picture}}}">
+						</div>
+					</div>
+					
+				</div>
+			</div>
+			
+			<div class = "container-fluid odd-row">
+				<div class = "row">
+					<div class = "col-sm-12 block-text">
+						<h1> Quick Statistics </h1>
+						<p> </p> <br/>
+						
+						<div class = "container-fluid">
+							<div class = "row">
+								<div class = "col-sm-4 text-center">
+									<img class = "leaderboard-icons" src = "../assets/unpublished.png" style = "width: 85px">
+								</div>
+								
+								<div class = "col-sm-4 text-center">
+									<img class = "leaderboard-icons" src = "../assets/published.png">
+								</div>
+								
+								<div class = "col-sm-4 text-center">
+									<img class = "leaderboard-icons" src = "../assets/rating.png">
+								</div>
+							</div>
+							
+							<div class = "row">
+								<div class = "col-sm-4 text-center">
+									<h4 class = "detail-title">Private Quizzes</h4>
+									{{private}}
+								</div>
+								
+								<div class = "col-sm-4 text-center">
+									<h4 class = "detail-title">Published Quizzes</h4>
+									{{published}}
+								</div>
+								
+								<div class = "col-sm-4 text-center">
+									<h4 class = "detail-title">Average Quiz Rating</h4>
+									{{ave}}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class = "container-fluid even-row">
+				<div class = "row">
+					<div class = "col-sm-12 block-text">
+						<h1> Quizzes Created </h1>
+						<p> </p> <br/>
+						
+						<div class = "container-fluid">
+							<table id = "history-quizzes" class = "table table-hover table-responsive" data-page-length = "5">
+								<thead>
+									<tr>
+										<th> Date Created </th>
+										<th> Quiz Name (Open as Taker) </th>
+										<th> Open as Creator </th>
+										<th> Status </th>
+									</tr>
+								</thead>
+								
+								<tbody id = "history-quizzes-body">
+									{{#each quizData}}
+									<tr>
+										<td> {{lookup ../quizDates @index}} </td>
+										<td> <a class = "quiz-names" target = "_blank" href = "/quizTeaser/{{{this.idNum}}}"> {{this.title}} </a> </td>
+										<td> 
+											<a class = "quiz-names" target = "_blank" href = "/quizCreator/{{{this.idNum}}}">Open</a> &nbsp;
+											<a class = "quiz-names" target = "_blank" href = "/quizCreator/{{{this.idNum}}}"><span class = "glyphicon glyphicon-new-window smaller-icon"></span></a>
+										</td>
+										<td class = "status-pub"> {{this.status}} </td>
+									</tr>
+									{{/each}}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class = "container-fluid odd-row">
+				<div class = "row">
+					<div class = "col-sm-12 block-text">
+						<h1> Privacy Management </h1>
+						<p> Deleting your quizzes removes all quiz data and their associated comments and ratings. Quiz deletion is irreversible. Unpublishing quizzes makes them inaccessible for other users but does not erase their data. </p>
+						
+						<div class = "container-fluid">
+							<p class = "top-header-btn-grp"> 
+								<button class = "block-btn impt inline-btn wider-btn" data-toggle = "modal" data-target = "#delete-all-quizzes"> 
+									<span class = "glyphicon glyphicon-trash"> </span> &nbsp;
+									Delete All Quizzes 
+								</button> 
+								
+								<button class = "block-btn impt wider-btn" data-toggle = "modal" data-target = "#unpublish-all-quizzes"> 
+									<span class = "glyphicon glyphicon-eye-close"> </span> &nbsp;
+									Unpublish All Quizzes 
+								</button> 
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			{{> footer}}
+		</div>
+		
+		<div id = "delete-all-quizzes" class = "modal fade">
+			<div class = "modal-dialog">
+				<div class = "modal-content">
+					<div class = "modal-header">
+						<p class = "close-x pointable" data-dismiss = "modal"> &times; </p>
+						<h4> <span class = "glyphicon glyphicon-warning-sign left-float"> </span> &nbsp; Delete All Quizzes </h4>
+					</div>
+					
+					<div class = "modal-body">
+						<form id = "delete-all-quizzes-form" method = "post">
+							<p id = "password-warning"> Deleting your quizzes removes all quiz data and their associated comments and ratings. Quiz deletion is irreversible. </p> <br/>
+							
+							<div class = "form-group">
+								<label for = "password-for-delete">Enter password</label>
+								<input id = "password-for-delete" name = "password" type = "password" class = "form-control" required> 
+							</div>
+							
+							<div class = "form-group">
+								<label for = "confirm-delete-all-quizzes"> </label>
+								<button id = "confirm-delete-all-quizzes" type = "submit" class = "btn btn-default btn-success btn-block">
+									Delete
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div id = "unpublish-all-quizzes" class = "modal fade">
+			<div class = "modal-dialog">
+				<div class = "modal-content">
+					<div class = "modal-header">
+						<p class = "close-x pointable" data-dismiss = "modal"> &times; </p>
+						<h4> <span class = "glyphicon glyphicon-warning-sign left-float"> </span> &nbsp; Unpublish All Quizzes </h4>
+					</div>
+					
+					<div class = "modal-body">
+						<form id = "unpublish-all-quizzes-form" method = "post">
+							<p id = "password-warning2"> Unpublishing quizzes makes them inaccessible for other users but does not erase their data. </p> <br/>
+							
+							<div class = "form-group">
+								<label for = "password-for-unpublish">Enter password
+								<span id = "incorrect-password-unpublish-all" class = "error-input-hidden"> Incorrect password </span>
+								</label>
+								<input id = "password-for-unpublish" name = "password" type = "password" class = "form-control" required> 
+							</div>
+							
+							<div class = "form-group">
+								<label for = "confirm-unpublish-all-quizzes"> </label>
+								<button id = "confirm-unpublish-all-quizzes" type = "submit" class = "btn btn-default btn-success btn-block">
+									Unpublish
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+			
+		<script src = "../scripts/sidebar.js"> </script>		
+		<script src = "../scripts/my-quizzes.js"> </script>
+	</body>
+
+</html>

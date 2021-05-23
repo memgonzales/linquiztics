@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<title> Edit Quiz </title>
+		<link rel = "icon" type = "image/png" href = "../assets/languages.png">
+		
+		<link rel = "stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+		<link rel = "stylesheet" type = "text/css" href = "https://fonts.googleapis.com/css?family=Open+Sans">
+		<link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel = "stylesheet" type = "text/css" href = "../styles/style.css">
+		<link rel = "stylesheet" type = "text/css" href = "../styles/quiz-style.css">
+		<link rel = "stylesheet" type = "text/css" href = "../styles/my-quizzes-style.css">
+		
+		<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"> </script>
+		<script src = "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"> </script>
+	</head>
+
+	<body id = "page-top" onload = "countStars({{{aveRating}}}); setVariables({{{highestIndex}}})">
+		<div id = "side-bar">
+			{{> sidebar flag = flag adminflag = adminflag username = username name = name picture = picture streak = streak exp = exp league = league position = position}}
+		</div>
+		
+		<div id = "page">
+			{{> navbar flag = flag adminflag = adminflag username = username name = name firstname = firstname}}
+		
+			<header class = "jumbotron top-header">
+				<div class = "container">
+					<div class = "row">
+						<div class = "col-sm-1"> </div>
+						<div class = "col-sm-4 text-center">
+							<img src = "../assets/languages.png">
+						</div>
+						
+						<div class = "col-sm-7 top-header-text">
+							<h1 id = "quiz-title"> {{title}} </h1> 
+							<h4><a class = "website" onclick = "showSidebar()"> {{name}} </a> </h4> <br/>
+							
+							<div class = "row">
+								<div class = "col-sm-6">
+									<p class = "quiz-header-details"> 
+										<span class = "glyphicon glyphicon-time left-float"> </span> &nbsp; {{dateCreated}} </br>
+										<span class = "glyphicon glyphicon-tag left-float"> </span> &nbsp; <span id = "quiz-tags"> {{cleanTags}} </span> </br>
+										<span class = "glyphicon glyphicon-font left-float"> </span> &nbsp; Display language:     <span id = "display-language"> {{displayLanguage}} </span> <br/>
+										<span class = "glyphicon glyphicon-book left-float"> </span> &nbsp; Subject languages:    <span id = "subject-languages"> {{cleanSubjectLanguages}} </span> </br>
+									</p>
+								</div>
+								
+								<div class = "col-sm-6">
+									<button class = "top-header-btn impt" data-toggle = "modal" data-target = "#edit-basic-details" onclick = "fetchDetails()">Edit Basic Details</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</header>
+			
+			<div class = "container-fluid even-row">
+				<div class = "row">
+					<div class = "col-sm-6 block-text">
+						<h1> Description  </h1>
+						<p id = "quiz-desc"> {{{description}}} </p>
+						
+						<p class = "top-header-btn-grp"> 
+							<button class = "block-btn impt" data-toggle = "modal" data-target = "#edit-description" onclick = "fetchDescription()"> Edit Description </button>
+						</p>
+					</div>
+					
+					<div class = "col-sm-6 text-left">												
+						<h1> Comments </h1>
+						
+						<div class = "container-fluid">
+							{{#each comments}}
+							<div class = "row">
+								<div class = "col-sm-2 text-left">
+									<img class = "comment-avatar" src = "{{{lookup ../commentPics @index}}}">
+								</div>
+								
+								<div class = "col-sm-9 text-left commenter-name">
+									<h4> <a class = "user-link pointable" href = "/publicProfile/{{{this.author}}}" target = "_blank"> <span id = "comment-author-{{{this.commentId}}}">{{lookup ../commentNames @index}} </span></a> </h4> 
+									<h6> 
+										{{lookup ../commentDates @index}} &nbsp; | &nbsp; 
+										<a id = "report-status-{{{this.commentId}}}" class = "report pointable" data-toggle = "modal" data-target = "#report-comment" onclick = "fetchCommentData(this)">Report comment</a> &nbsp; 
+										<span id = "report-icon-{{{this.commentId}}}" class = "glyphicon glyphicon-flag"> </span>
+									</h6>
+									
+									<p id = "comment-body-{{{this.commentId}}}"> {{this.body}} </p>
+									<br><br>
+								</div>
+							</div>
+							{{/each}}
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class = "container-fluid odd-row">
+				<div class = "row">
+					<div class = "col-sm-6 block-text">
+						<h1> Rating  </h1>
+						<p> 
+							<span id = "star-1" class = "fa fa-star"> </span>
+							<span id = "star-2" class = "fa fa-star"> </span>
+							<span id = "star-3" class = "fa fa-star"> </span>
+							<span id = "star-4" class = "fa fa-star"> </span>
+							<span id = "star-5" class = "fa fa-star"> </span> &nbsp; &nbsp; &nbsp; &nbsp;
+							
+							<span> Average Rating: {{aveRating}} </span>
+						</p>
+						
+						<p class = "top-header-btn-grp"> 
+							<button class = "block-btn impt" data-toggle = "modal" data-target = "#indiv-ratings"> Individual Ratings </button>
+						</p>
+					</div>
+					
+					<div class = "col-sm-6 text-left">												
+						<h1> Accuracy </h1>
+						
+						<p> 
+							<span> <img class = "small-icons" src = "../assets/scores.png"> &nbsp; Average Accuracy of Takers: {{aveAccuracy}}% &nbsp; &nbsp; &nbsp; &nbsp; 
+							<img class = "small-icons" src = "../assets/featured.png"> &nbsp; Highest Score: {{maxAccuracy}}% </span>
+						</p>
+					</div>
+				</div>
+			</div>
+			
+			<div id = "all-questions" class = "container-fluid even-row">
+				{{#each questions}}
+				<div id = "container-question-{{{this.index}}}" class = "row">
+					<div class = "col-sm-5 block-text">
+						<h2>Question</h2>
+						<p id = "question-{{{this.index}}}"> {{this.body}} </p>
+						
+						<p id = "photo-{{{this.index}}}">
+							<img id = "p-{{{this.index}}}" class = "quiz-create-img" src = "{{{this.image}}}">
+						</p>
+						
+						<p id = "audio-{{{this.index}}}">
+							{{#if this.audio}}
+							<audio id = "aud-{{{this.index}}}" controls><source src = "{{{this.audio}}}" type = "audio/mpeg" class = "quiz-img"></audio>
+							{{else}}
+							<audio id = "aud-{{{this.index}}}"><source src = "{{{this.audio}}}" type = "audio/mpeg" class = "quiz-img"></audio>
+							{{/if}}
+						</p>
+						
+						<ol type = "A">
+							<li id = "choiceA-{{{this.index}}}"> {{this.choiceA}} </li>
+							<li id = "choiceB-{{{this.index}}}"> {{this.choiceB}} </li>
+							<li id = "choiceC-{{{this.index}}}"> {{this.choiceC}} </li>
+							<li id = "choiceD-{{{this.index}}}"> {{this.choiceD}} </li>
+						</ol>
+						
+						<p> 
+							<span id = "correct-answer-container"> Correct Answer:</span> <span id = "answer-{{{this.index}}}"> {{choiceConvert this.correctAnswer}} </span> <br/>
+							<span id = "explanation-container"> Explanation:</span> <span id = "explanation-{{{this.index}}}" class = "explanation"> {{this.explanation}} </span> 
+						</p>
+						
+					</div>
+					
+					<div class = "col-sm-2 text-left">
+						<h2> </h2> <br/>
+						<h4> 
+							<a class = "edit pointable"><span id = "edit-icon-q{{{this.index}}}" class = "glyphicon glyphicon-pencil" data-toggle = "modal" data-target = "#edit-question" onclick = "fetchQuestion(this)"> </span></a> &nbsp; 
+							<a id = "edit-q{{{this.index}}}" class = "edit pointable" data-toggle = "modal" data-target = "#edit-question" onclick = "fetchQuestion(this)">Edit Item</a>
+						</h4>
+					
+						<h4> 
+							<a class = "edit pointable"><span id = "edit-icon-a{{{this.index}}}" class = "glyphicon glyphicon-edit" data-toggle = "modal" data-target = "#edit-answer" onclick = "fetchAnswer(this)"> </span></a> &nbsp;
+							<a id = "edit-a{{{this.index}}}" class = "edit pointable" data-toggle = "modal" data-target = "#edit-answer" onclick = "fetchAnswer(this)">Edit Answer</a>
+						</h4>
+						
+						<h4> 
+							<a class = "edit pointable"><span id = "delete-icon-q{{{this.index}}}" class = "glyphicon glyphicon-trash" data-toggle = "modal" data-target = "#delete-quiz-item" onclick = "fetchDelete(this)"> </span></a> &nbsp; 
+							<a id = "delete-q{{{this.index}}}" class = "edit pointable" data-toggle = "modal" data-target = "#delete-quiz-item" onclick = "fetchDelete(this)">Delete Item</a>
+						</h4> <br/>
+						
+						<h4> 
+							<a class = "edit pointable"><span id = "edit-icon-x{{{this.index}}}" class = "glyphicon glyphicon-picture" data-toggle = "modal" data-target = "#edit-image" onclick = "fetchImage(this)"> </span></a> &nbsp; 
+							<a id = "edit-x{{{this.index}}}" class = "edit pointable" data-toggle = "modal" data-target = "#edit-image" onclick = "fetchImage(this)">Edit Image File</a>
+						</h4>
+						
+						<h4> 
+							<a class = "edit pointable"><span id = "edit-icon-y{{{this.index}}}" class = "glyphicon glyphicon-headphones" data-toggle = "modal" data-target = "#edit-audio" onclick = "fetchAudio(this)"> </span></a> &nbsp; 
+							<a id = "edit-y{{{this.index}}}" class = "edit pointable" data-toggle = "modal" data-target = "#edit-audio" onclick = "fetchAudio(this)">Edit Audio File</a>
+						</h4>
+						
+					</div>
+
+					
+					<div class = "col-sm-4 text-left">
+						<h2> </h2> <br/>
+						<div class = "container-fluid">
+						{{#each this.commentdata}}
+							<div class = "row">
+								<div class = "col-sm-3 text-left">
+									<img class = "comment-avatar" src = "{{{this.quizCommentPic}}}">
+								</div>
+								
+								<div class = "col-sm-9 text-left commenter-name">
+									<h4> <a class = "user-link pointable" href = "/publicProfile/{{{this.quizCommentAuthor}}}" target = "_blank"><span id = "comment-author-{{{this.quizCommentNum}}}">{{this.quizCommentName}}</span> </a> </h4> 
+									<h6> 
+										{{this.quizCommentDatePosted}} &nbsp; | &nbsp; 
+										<a id = "report-status-{{{this.quizCommentNum}}}" class = "report pointable" data-toggle = "modal" data-target = "#report-comment" onclick = "fetchCommentData(this)">Report comment</a> &nbsp; 
+										<span id = "report-icon-{{{this.quizCommentNum}}}" class = "glyphicon glyphicon-flag" class = "glyphicon glyphicon-flag"> </span>
+									</h6>
+									
+									<p id = "comment-body-{{{this.quizCommentNum}}}"> {{this.quizCommentBody}} </p>
+								</div>
+							</div>
+						{{/each}}
+						</div>
+					</div>
+					
+				</div> <br/>
+				{{/each}}
+				
+				<!-- Div tag for new question -->
+				<div id = "standin-question"> </div>
+				<!-- Div tag for new question -->
+				
+				<div id = "add-question-container" class = "row">
+					<div class = "col-sm-6 block-text">
+						
+						<form id = "add-question-form" method = "post">
+						<input id = "idNum" type = "hidden" name = "idNum" value = "{{{idNum}}}">
+								<button id = "add-question-btn" class = "block-btn impt" type = "submit">Add a Question</button>
+						</form>
+						
+					</div>
+				</div> <br/>
+			</div>
+			
+			<div class = "container-fluid odd-row">
+				<div class = "row">
+					<div class = "col-sm-7 block-text">
+						<h1> Publish  </h1>
+						<p> 
+							Now that you have finished editing or creating the items, publish the quiz in order to make it public and to allow users to take it.
+						</p>
+						
+						<p>
+							Once you decide to publish it, it is automatically classified as a <a class = "website" target = "_blank" href = "https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons-licensed resource</a> <a class = "edit pointable" target = "_blank" href = "https://creativecommons.org/licenses/by-sa/4.0/"><span class = "glyphicon glyphicon-new-window smaller-icon"></span></a>
+						</p>
+						
+						<p class = "top-header-btn-grp"> 
+							<div class = "row">
+								<div class = "col-sm-6 text-left">
+									<button id = "save" class = "block-btn impt narrower-btn" data-toggle = "modal" data-target = "#publish-quiz"> 
+										<span class = "glyphicon glyphicon-share"> </span> &nbsp; Publish 
+									</button>
+								</div>
+							</div>
+						</p> <br/>
+					</div>
+					
+					<div class = "col-sm-4 text-left">
+						<h1> Privacy Management  </h1>
+						<p>
+							Your quizzes are, by default, unlisted. Nevertheless, kindly place proper attribution for all external media. 
+						</p>
+						<p> 
+							Once a quiz is deleted, its contents, comments, and ratings are erased and cannot be restored. Unpublish the quiz to prevent other users from accessing it.
+						</p>
+						
+						<p class = "top-header-btn-grp"> 
+							<div class = "row">
+								<div class = "col-sm-5 text-left">
+									<button class = "block-btn impt inline-btn narrower-btn" data-toggle = "modal" data-target = "#delete-quiz"> 
+										<span class = "glyphicon glyphicon-trash"> </span> &nbsp; Delete 
+									</button>
+								</div>
+							
+								<div class = "col-sm-6 text-left">
+									<button class = "block-btn impt narrower-btn" data-toggle = "modal" data-target = "#unpublish-quiz"> 
+										<span class = "glyphicon glyphicon-eye-close"> </span> &nbsp; Unpublish 
+									</button>
+								</div>
+							</div>
+						</p> <br/>
+						
+						<p>
+							<span id = "unpublished-status" class = "em"> </span>
+						</p>
+					</div>
+				</div> <br/>
+			</div>
+			
+			{{> footer}}
+		</div>
+		
+		<div id = "edit-basic-details" class = "modal fade">
+			<div class = "modal-dialog">
+				<div class = "modal-content">
+					<div class = "modal-header">
+						<p class = "close-x pointable" data-dismiss = "modal"> &times; </p>
+						<h4> Edit Basic Details </h4>
+					</div>
+					
+					<div class = "modal-body">
+						<form id = "edit-basic-details-form" method = "post">
+							<div class = "form-group">
+								<input id = "idNum" type = "hidden" name = "idNum" value = "{{{idNum}}}">
+								<label for = "newTitle">Title</label>
+								<input id = "newTitle" type = "text" name = "newTitle" class = "form-control" required> 
+							</div>
+							
+							<div class = "form-group">
+								<label for = "newTags">Tags (Follow this format: <span class = "code-font">tag1, tag2, tag3</span>)</label>
+								<input id = "newTags" type = "text" name = "newTags" class = "form-control" required> 
+							</div>
+							
+							<div class = "form-group">
+								<label for = "displayLangSelection">Display Language (Language in which quiz is written)</label>
+								<select id = "displayLangSelection" name = "displayLangSelection" class = "form-control">
+									<option value = "Chinese">Chinese</option>
+									<option value = "English">English</option>
+									<option value = "Filipino">Filipino</option>
+									<option value = "German">German</option>
+									<option value = "Japanese">Japanese</option>
+								</select>
+							</div>
+							
+							<div class = "form-group">
+								<label for = "langSelection">Subject Languages (Hold <span class = "code-font">ctrl</span> for multiple languages)</label>
+								<select id = "langSelection" name = "langSelection" class = "form-control" multiple>
+									<option value = "Chinese">Chinese</option>
+									<option value = "English">English</option>
+									<option value = "Filipino">Filipino</option>
+									<option value = "German">German</option>
+									<option value = "Japanese">Japanese</option>
+								</select>
+							</div>
+							
+							<div class = "form-group">
+								<label for = "confirm-change-details"> </label>
+								<button id = "confirm-change-details" type = "submit" class = "btn btn-default btn-success btn-block">
+									Edit
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div id = "edit-description" class = "modal fade">
+			<div class = "modal-dialog">
+				<div class = "modal-content">
+					<div class = "modal-header">
+						<p class = "close-x pointable" data-dismiss = "modal"> &times; </p>
+						<h4> Edit Description </h4>
+					</div>
+					
+					<div class = "modal-body">
+						<form id = "edit-description-form" method = "post">
+							<div class = "form-group">
+								<input id = "idNum" type = "hidden" name = "idNum" value = "{{{idNum}}}">
+								<label for = "newDesc" value = ""> </label>
+								<textarea id = "newDesc" name = "newDesc" class = "form-control"> </textarea>
+							</div>
+							
+							<div class = "form-group">
+								<label for = "confirm-edit-desc"> </label>
+								<button id = "confirm-edit-desc" type = "submit" class = "btn btn-default btn-success btn-block">
+									Edit
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div id = "indiv-ratings" class = "modal fade">
+			<div class = "modal-dialog">
+				<div class = "modal-content">
+					<div class = "modal-header">
+						<p class = "close-x pointable" data-dismiss = "modal"> &times; </p>
+						<h4> Individual Ratings </h4>
+					</div>
+					
+					<div class = "modal-body">
+						<table id = "indiv-ratings-table" class = "table table-hover">
+							<thead>
+								<tr>
+									<th> Rating </th>
+									<th> Number of Instances </th>
+							</thead>
+							<tbody>
+								<tr>
+									<td> 5 stars </td>
+									<td> {{numFive}} </td>
+								</tr>
+								
+								<tr>
+									<td> 4 stars </td>
+									<td> {{numFour}} </td>
+								</tr>
+								
+								<tr>
+									<td> 3 stars </td>
+									<td> {{numThree}} </td>
+								</tr>
+								
+								<tr>
+									<td> 2 stars </td>
+									<td> {{numTwo}} </td>
+								</tr>
+								
+								<tr>
+									<td> 1 star </td>
+									<td> {{numOne}} </td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div id = "report-comment" class = "modal fade">
+			<div class = "modal-dialog">
+				<div class = "modal-content">
+					<div class = "modal-header">
+						<p class = "close-x pointable" data-dismiss = "modal"> &times; </p>
+						<h4> Report Comment </h4>
+					</div>
+					
+					<div class = "modal-body">
+						<form id = "report-comment-form" method = "post">
+							<div class = "form-group">
+								<label for = "report-reasons" value = "">Reason for Reporting </label>
+								<select id = "report-reasons" class = "form-control" name = "commentReport">
+									<option value = "Hate Speech">Hate Speech</option>
+									<option value = "Harassment">Harassment</option>
+									<option value = "Inappropriate Content">Inappropriate Content</option>
+									<option value = "Trolling">Trolling</option>
+								</select>
+							</div>
+							
+							<div class = "form-group">
+								<input id = "reportIdnum" type = "hidden" name = "reportIdnum" value = "{{{idNum}}}">
+								<input id = "reportQuizname" type = "hidden" name = "reportQuizname" value = "{{{title}}}">
+								<input id = "reportCommentnum" type = "hidden" name = "reportCommentnum">
+								<input id = "reportAuthor" type = "hidden" name = "reportAuthor">
+								<input id = "reportCommentbody" type = "hidden" name = "reportCommentbody">
+								<label for = "confirm-report-comment"> </label>
+								<button id = "confirm-report-comment" type = "submit" class = "btn btn-default btn-success btn-block">
+									Report
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div id = "publish-quiz" class = "modal fade">
+			<div class = "modal-dialog">
+				<div class = "modal-content">
+					<div class = "modal-header">
+						<p class = "close-x pointable" data-dismiss = "modal"> &times; </p>
+						<h4> Publish Quiz </h4>
+					</div>
+					
+					<div class = "modal-body">
+						<form id = "publish-quiz-form" method = "post">
+							<div class = "form-group">
+								<p> Publishing your quiz makes it visible to other users. Other users can take, comment, rate, and report the quiz. To make its visibility unlisted, the quiz must be unpublished. </p> <br/>
+
+								<input id = "idNum" type = "hidden" name = "idNum" value = "{{{idNum}}}">
+								<button id = "confirm-publish" type = "submit" class = "btn btn-default btn-success btn-block">
+									Publish
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div id = "edit-question" class = "modal fade">
+			<div class = "modal-dialog">
+				<div class = "modal-content">
+					<div class = "modal-header">
+						<p class = "close-x pointable" data-dismiss = "modal"> &times; </p>
+						<h4> Edit Question </h4>
+					</div>
+					
+					<div class = "modal-body">
+						<form id = "edit-question-form" method = "post">
+							<div class = "form-group">
+								<input id = "idNum" type = "hidden" name = "idNum" value = "{{{idNum}}}">
+								<input id = "questionIndex" type = "hidden" name = "questionIndex">
+								<label for = "newQuestion" value = ""> Question </label>
+								<textarea id = "newQuestion" name = "newQuestion" class = "form-control"> </textarea>
+							</div>
+							
+							<div class = "form-group">
+								<label for = "newQuestion" value = ""> Choice A </label>
+								<input id = "choiceA" name = "choiceA" class = "form-control" type = "text" required>
+							</div>
+							
+							<div class = "form-group">
+								<label for = "newQuestion" value = ""> Choice B </label>
+								<input id = "choiceB" name = "choiceB" class = "form-control" type = "text" required>
+							</div>
+							
+							<div class = "form-group">
+								<label for = "newQuestion" value = ""> Choice C </label>
+								<input id = "choiceC" name = "choiceC" class = "form-control" type = "text" required>
+							</div>
+							
+							<div class = "form-group">
+								<label for = "newQuestion" value = ""> Choice D </label>
+								<input id = "choiceD" name = "choiceD" class = "form-control" type = "text" required>
+							</div>
+							
+							<div class = "form-group">
+								<label for = "confirm-edit-question"> </label>
+								<button id = "confirm-edit-question" type = "submit" class = "btn btn-default btn-success btn-block">
+									Edit
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div id = "edit-answer" class = "modal fade">
+			<div class = "modal-dialog">
+				<div class = "modal-content">
+					<div class = "modal-header">
+						<p class = "close-x pointable" data-dismiss = "modal"> &times; </p>
+						<h4> Edit Answer </h4>
+					</div>
+					
+					<div class = "modal-body">
+						<form id = "edit-answer-form" method = "post">
+							<div class = "form-group">
+								<input id = "idNum" type = "hidden" name = "idNum" value = "{{{idNum}}}">
+								<input id = "answerIndex" type = "hidden" name = "answerIndex">
+								<label for = "correctAnswer" value = "">Correct Answer</label>
+								<select id = "correctAnswer" class = "form-control" name = "correctAnswer">
+									<option value = "choice-a">A</option>
+									<option value = "choice-b">B</option>
+									<option value = "choice-c">C</option>
+									<option value = "choice-d">D</option>
+								</select>
+							</div>
+							
+							<div class = "form-group">
+								<label for = "newExplanation" value = "">Explanation</label>
+								<textarea id = "newExplanation" class = "form-control" name = "newExplanation"> </textarea>
+							</div>
+							
+							<div class = "form-group">
+								<label for = "confirm-edit-answer"> </label>
+								<button id = "confirm-edit-answer" type = "submit" class = "btn btn-default btn-success btn-block">
+									Edit
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div id = "edit-image" class = "modal fade">
+			<div class = "modal-dialog">
+				<div class = "modal-content">
+					<div class = "modal-header">
+						<p class = "close-x pointable" data-dismiss = "modal"> &times; </p>
+						<h4> Edit Image File </h4>
+					</div>
+					
+					<div class = "modal-body">
+						<form id = "edit-image-form" method = "post" enctype = "multipart/form-data">
+							<div class = "form-group">
+								<input id = "idNum" type = "hidden" name = "idNum" value = "{{{idNum}}}">
+								<input id = "imageIndex" type = "hidden" name = "imageIndex">
+								<label for = "image-file-upload">Upload Image</label>
+								<input id = "image-file-upload" name = "imageFileUpload" type = "file" accept = "image/*">
+							</div>
+							
+							<div class = "form-group">
+								<label for = "confirm-edit-image"> </label>
+								<button id = "confirm-edit-image" type = "submit" class = "btn btn-default btn-success btn-block">
+									Edit
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div id = "edit-audio" class = "modal fade">
+			<div class = "modal-dialog">
+				<div class = "modal-content">
+					<div class = "modal-header">
+						<p class = "close-x pointable" data-dismiss = "modal"> &times; </p>
+						<h4> Edit Audio File </h4>
+					</div>
+					
+					<div class = "modal-body">
+						<form id = "edit-audio-form" method = "post" enctype = "multipart/form-data">
+							<div class = "form-group">
+								<input id = "idNum" type = "hidden" name = "idNum" value = "{{{idNum}}}">
+								<input id = "audioIndex" type = "hidden" name = "audioIndex">
+								<label for = "audio-file-upload">Upload Audio</label>
+								<input id = "audio-file-upload" name = "audioFileUpload" type = "file" accept = "audio/*">
+							</div>
+							
+							<div class = "form-group">
+								<label for = "confirm-edit-audio"> </label>
+								<button id = "confirm-edit-audio" type = "submit" class = "btn btn-default btn-success btn-block">
+									Edit
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div id = "delete-quiz-item" class = "modal fade">
+			<div class = "modal-dialog">
+				<div class = "modal-content">
+					<div class = "modal-header">
+						<p class = "close-x pointable" data-dismiss = "modal"> &times; </p>
+						<h4> <span class = "glyphicon glyphicon-warning-sign left-float"> </span> &nbsp; Delete Quiz Item </h4>
+					</div>
+					
+					<div class = "modal-body">
+						<form id = "delete-quiz-item-form" method = "post">
+							<div class = "form-group">
+								<p> Quiz item deletion is irreversible. Once you delete a quiz item, the item itself and the comments on it are erased and cannot be restored. </p> <br/>
+								<input id = "idNum" type = "hidden" name = "idNum" value = "{{{idNum}}}">
+								<input id = "deleteIndex" type = "hidden" name = "deleteIndex">
+								<button id = "confirm-delete-item" type = "submit" class = "btn btn-default btn-success btn-block">
+									Delete
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div id = "unpublish-quiz" class = "modal fade">
+			<div class = "modal-dialog">
+				<div class = "modal-content">
+					<div class = "modal-header">
+						<p class = "close-x pointable" data-dismiss = "modal"> &times; </p>
+						<h4> <span class = "glyphicon glyphicon-warning-sign left-float"> </span> &nbsp; Unpublish Quiz </h4>
+					</div>
+					
+					<div class = "modal-body">
+						<form id = "unpublish-quiz-form" method = "post">
+							<div class = "form-group">
+								<p> Publishing your quiz makes it visible to other users. Other users can take, comment, rate, and report the quiz. To make its visibility unlisted, the quiz must be unpublished. </p> <br/>
+								
+								<input id = "idNum" type = "hidden" name = "idNum" value = "{{{idNum}}}">
+								<button id = "confirm-unpublish" type = "submit" class = "btn btn-default btn-success btn-block">
+									Unpublish
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div id = "delete-quiz" class = "modal fade">
+			<div class = "modal-dialog">
+				<div class = "modal-content">
+					<div class = "modal-header">
+						<p class = "close-x pointable" data-dismiss = "modal"> &times; </p>
+						<h4> <span class = "glyphicon glyphicon-warning-sign left-float"> </span> &nbsp; Delete Quiz </h4>
+					</div>
+					
+					<div class = "modal-body">
+						<form id = "delete-quiz-form" method = "post">
+							<div class = "form-group">
+								<p> Quiz deletion is irreversible. Once you delete a quiz, the quiz itself and the comments on it are erased and cannot be restored. </p> <br/>
+								
+								<input id = "idNum" type = "hidden" name = "idNum" value = "{{{idNum}}}">
+								<input id = "username" type = "hidden" name = "username" value = "{{{username}}}">
+								<button id = "confirm-delete-quiz" type = "submit" class = "btn btn-default btn-success btn-block">
+									Delete
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+			
+		<script src = "../scripts/sidebar.js"> </script>
+		<script src = "../scripts/quiz-creator.js"> </script>
+	</body>
+
+</html>

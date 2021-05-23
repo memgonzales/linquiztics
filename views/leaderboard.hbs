@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<title> Leaderboard </title>
+		<link rel = "icon" type = "image/png" href = "../assets/languages.png">
+		
+		<link rel = "stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+		<link rel = "stylesheet" href = "https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+		<link rel = "stylesheet" type = "text/css" href = "https://fonts.googleapis.com/css?family=Open+Sans">
+		<link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel = "stylesheet" type = "text/css" href = "../styles/style.css">
+		<link rel = "stylesheet" type = "text/css" href = "../styles/leaderboard-style.css">
+		
+		<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"> </script>
+		<script src = "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"> </script>
+	</head>
+
+	<body id = "page-top">
+		<div id = "side-bar">
+			{{> sidebar flag = flag adminflag = adminflag username = username name = name picture = picture streak = streak exp = exp league = league position = position}}
+		</div>
+
+		<div id = "page">
+			{{> navbar flag = flag adminflag = adminflag username = username name = name}}
+		
+			<header class = "jumbotron top-header">
+				<div class = "container">
+					<div class = "row">
+						<div class = "col-sm-1"> </div>
+						<div class = "col-sm-4 text-center">
+							<img src = "../assets/languages.png">
+						</div>
+						
+						<div class = "col-sm-7 top-header-text">
+							<h1> Leaderboard </h1> 							
+							<p> 
+								The leaderboard shows the top three users with the highest total amounts of EXP. The complete ranking list, divided into leagues, can also be accessed below.
+							</p>
+							
+							<p>	
+								Keep taking quizzes to advance up the leagues!
+							</p>
+						</div>
+					</div>
+				</div>
+			</header>
+			
+			<div class = "container-fluid even-row reduced-spacing">		
+				<div class = "row text-center">
+					<h1>Diamond League</h1>
+				</div> <br/>
+			
+				<div class = "row">
+					{{#each top}}
+					<div class = "col-sm-4 text-center">
+						<img class = "leaderboard-avatar" src = "{{{this.picture}}}">
+						<a class = "username" href = "/publicProfile/{{{this.username}}}" target = "_blank"><h2> {{this.name}} </h2></a>
+						<h4 class = "code-font"> {{this.exp}} EXP </h4>
+					</div>
+					{{/each}}
+				</div>
+			</div>
+			
+			<div class = "container-fluid odd-row">
+				<div class = "row">
+					<div class = "col-sm-12 text-center">
+						<h2> Complete Ranking List </h2>
+					</div>
+				</div> <br/>
+				
+				<div class = "row">
+					<div class = "col-sm-12 block-text">
+						<div class = "container-fluid">
+							<ul class = "nav nav-tabs">
+								<li class = "active"><a data-toggle = "tab" href = "#diamond">Diamond</a></li>
+								<li><a data-toggle = "tab" href = "#platinum">Platinum</a>
+								<li><a data-toggle = "tab" href = "#gold">Gold</a>
+								<li><a data-toggle = "tab" href = "#silver">Silver</a>
+								<li><a data-toggle = "tab" href = "#bronze">Bronze</a>
+							</ul>
+							
+							<div class = "tab-content">
+								<div id = "diamond" class = "tab-pane fade in active">
+									<div class = "container-fluid">
+										<p> </p> <br/>
+										<table class = "table table-hover table-responsive leaderboard-table" data-page-length = "5">
+											<thead>
+												<tr>
+													<th> Rank </th>
+													<th> Name </th>
+													<th> Username </th>
+													<th> Total EXP </th>
+												</tr>
+											</thead>
+											
+											<tbody>
+												{{#each diamond}}
+												<tr>
+													<td> {{this.position}} </td>
+													<td> <a class = "username pointable" href = "/publicProfile/{{{this.username}}}" target = "_blank"> {{this.name}} </a> </td>
+													<td class = "code-font"> {{this.username}} </td>
+													<td> {{this.exp}} </td>
+												</tr>
+												{{/each}}
+											</tbody>
+										</table>
+									</div>
+								</div>
+								
+								<div id = "platinum" class = "tab-pane fade">
+									<div class = "container-fluid">
+										<p> </p> <br/>
+										<table class = "table table-hover table-responsive leaderboard-table" data-page-length = "5">
+											<thead>
+												<tr>
+													<th> Rank </th>
+													<th> Name </th>
+													<th> Username </th>
+													<th> Total EXP </th>
+												</tr>
+											</thead>
+											
+											<tbody>
+												{{#each platinum}}
+												<tr>
+													<td> {{this.position}} </td>
+													<td> <a class = "username pointable" href = "/publicProfile/{{{this.username}}}" target = "_blank"> {{this.name}} </a> </td>
+													<td class = "code-font"> {{this.username}} </td>
+													<td> {{this.exp}} </td>
+												</tr>
+												{{/each}}
+											</tbody>
+										</table>
+									</div>
+								</div>
+								
+								<div id = "gold" class = "tab-pane fade">
+									<div class = "container-fluid">
+										<p> </p> <br/>
+										<table class = "table table-hover table-responsive leaderboard-table" data-page-length = "5">
+											<thead>
+												<tr>
+													<th> Rank </th>
+													<th> Name </th>
+													<th> Username </th>
+													<th> Total EXP </th>
+												</tr>
+											</thead>
+											
+											<tbody>
+												{{#each gold}}
+												<tr>
+													<td> {{this.position}} </td>
+													<td> <a class = "username pointable" href = "/publicProfile/{{{this.username}}}" target = "_blank"> {{this.name}} </a> </td>
+													<td class = "code-font"> {{this.username}} </td>
+													<td> {{this.exp}} </td>
+												</tr>
+												{{/each}}
+											</tbody>
+										</table>
+									</div>
+								</div>
+								
+								<div id = "silver" class = "tab-pane fade">
+									<div class = "container-fluid">
+										<p> </p> <br/>
+										<table class = "table table-hover table-responsive leaderboard-table" data-page-length = "5">
+											<thead>
+												<tr>
+													<th> Rank </th>
+													<th> Name </th>
+													<th> Username </th>
+													<th> Total EXP </th>
+												</tr>
+											</thead>
+											
+											<tbody>
+												{{#each silver}}
+												<tr>
+													<td> {{this.position}} </td>
+													<td> <a class = "username pointable" href = "/publicProfile/{{{this.username}}}" target = "_blank"> {{this.name}} </a> </td>
+													<td class = "code-font"> {{this.username}} </td>
+													<td> {{this.exp}} </td>
+												</tr>
+												{{/each}}
+											</tbody>
+										</table>
+									</div>
+								</div>
+								
+								<div id = "bronze" class = "tab-pane fade">
+									<div class = "container-fluid">
+										<p> </p> <br/>
+										<table class = "table table-hover table-responsive leaderboard-table" data-page-length = "5">
+											<thead>
+												<tr>
+													<th> Rank </th>
+													<th> Name </th>
+													<th> Username </th>
+													<th> Total EXP </th>
+												</tr>
+											</thead>
+											
+											<tbody>
+												{{#each bronze}}
+												<tr>
+													<td> {{this.position}} </td>
+													<td> <a class = "username pointable" href = "/publicProfile/{{{this.username}}}" target = "_blank"> {{this.name}} </a> </td>
+													<td class = "code-font"> {{this.username}} </td>
+													<td> {{this.exp}} </td>
+												</tr>
+												{{/each}}
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			{{> footer}}
+
+		</div>
+		
+		<script src = "../scripts/sidebar.js"> </script>
+	</body>
+
+</html>

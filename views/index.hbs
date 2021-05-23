@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<title> Home </title>
+		<link rel = "icon" type = "image/png" href = "assets/languages.png">
+		
+		<link rel = "stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+		<link rel = "stylesheet" type = "text/css" href = "https://fonts.googleapis.com/css?family=Open+Sans">
+		<link rel = "stylesheet" type = "text/css" href = "styles/style.css">
+		
+		<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"> </script>
+		<script src = "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"> </script>
+	</head>
+
+	<body id = "page-top">
+		<div id = "side-bar">
+			{{> sidebar flag = flag adminflag = adminflag username = username name = name picture = picture streak = streak exp = exp league = league position = position}}
+		</div>
+		
+		<div id = "page">
+			{{> navbar flag = flag adminflag = adminflag username = username name = name firstname = firstname}}
+			{{> banner flag = flag adminflag = adminflag}}
+			
+			<div id = "container-slides" class = "container-fluid">
+				<div id = "slides" class = "carousel slide" data-ride = "carousel">
+					<ol class = "carousel-indicators">
+						<li data-target = "#slides" data-slide-to = "0" class = "active"> </li>
+						<li data-target = "#slides" data-slide-to = "1"> </li>
+						<li data-target = "#slides" data-slide-to = "2"> </li>
+					</ol>
+					
+					<div class = "carousel-inner">
+						<div class = "item active">
+							<img src = "assets/carouselthree.jpg">
+							<div class = "carousel-caption">
+								<p>
+									<h3> User-sourced content </h3>
+									With quizzes made by users themselves, Linquiztics offers content covering the latest language developments. 
+								</p>
+							</div>
+						</div>
+						
+						<div class = "item">
+							<img src = "assets/carouseltwo.jpg">
+							<div class = "carousel-caption">
+								<p>
+									<h3> Multiple supported languages </h3>
+									Take quizzes on a variety of topics covering English, Filipino, Chinese, Japanese, and German. 
+								</p>
+							</div>
+						</div>
+						
+						<div class = "item">
+							<img src = "assets/carouselone.jpg">
+							<div class = "carousel-caption">
+								<p>
+									<h3> Rapid feedback </h3>
+									With our rating and comment systems, users and creators can give and receive immediate quiz feedback.
+								</p>
+							</div>
+						</div>
+					</div>
+					
+					<a class = "left carousel-control" href = "#slides" data-slide = "prev">
+						<span class = "glyphicon glyphicon-chevron-left"> </span>
+						<span class = "sr-only"> Previous </span>
+					</a>
+					
+					<a class = "right carousel-control" href = "#slides" data-slide = "next">
+						<span class = "glyphicon glyphicon-chevron-right"> </span>
+						<span class = "sr-only"> Next </span>
+					</a>
+				</div>
+			</div>
+			
+			{{> footer}}
+		</div>
+		
+		<div id = "get-started" class = "modal fade">
+			<div class = "modal-dialog">
+				<div class = "modal-content">
+					<div class = "modal-header">
+						<p class = "close-x pointable" data-dismiss = "modal"> &times; </p>
+						<h4> Get Started </h4>
+					</div>
+					
+					<div class = "modal-body">
+						<form>
+							Create an account if you do not have an account yet, or log in to make use of the full features of the site.
+							
+							<div class = "form-group">
+								<label for = "new-user"> </label>
+								<button id = "new-user" type = "reset" class = "btn btn-default btn-success btn-block" onclick = "openCreateAccount()">
+									Create an Account
+								</button> <br/>
+								
+								<h4 class = "partial-strikethrough"> <span>&nbsp; &nbsp; &nbsp;or&nbsp; &nbsp; &nbsp; </span> </h4> 
+
+								<label for = "old-user"> </label>
+								<button id = "old-user" type = "reset" class = "btn btn-default btn-success btn-block" onclick = "openLogIn()">
+									Log In
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<script src = "scripts/sidebar.js"> </script>
+		<script src = "scripts/index-unregistered.js"> </script>
+	</body>
+
+</html>

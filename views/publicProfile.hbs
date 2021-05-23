@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<title> Profile | {{username}} </title>
+		<link rel = "icon" type = "image/png" href = "../assets/languages.png">
+		
+		<link rel = "stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+		<link rel = "stylesheet" href = "https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+		<link rel = "stylesheet" type = "text/css" href = "https://fonts.googleapis.com/css?family=Open+Sans">
+		<link rel = "stylesheet" type = "text/css" href = "../styles/style.css">
+		<link rel = "stylesheet" type = "text/css" href = "../styles/quiz-style.css">
+		<link rel = "stylesheet" type = "text/css" href = "../styles/profile-style.css">
+		
+		<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"> </script>
+		<script src = "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"> </script>
+		<script src = "https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"> </script>
+		
+		<!-- Internal style sheet necessary to override DataTables formatting -->
+		<style>		
+			.dataTables_wrapper .dataTables_paginate .paginate_button {
+			  background: none;
+			  color: black !important;
+			  border: 0 !important;
+			}
+			
+			.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+			  background: none;
+			  color: black !important;
+			  border: 0 !important;
+			}
+
+			.dataTables_wrapper .dataTables_paginate .paginate_button:active {
+			  background: none;
+			  color: black !important;
+			  border: 0 !important;
+			}
+		</style>
+	</head>
+
+	<body id = "page-top">	
+		<div id = "side-bar">
+			{{> sidebar flag = sessionflag adminflag = sessionadminflag username = sessionusername name = sessionname picture = sessionpicture streak = sessionstreak exp = sessionexp league = sessionleague position = sessionposition}}
+		</div>
+		
+		<div id = "page">
+			{{> navbar flag = sessionflag adminflag = sessionadminflag username = sessionusername name = sessionname firstname = sessionfirstname}}
+			
+			<div class = "container-fluid even-row header-row">
+				<div class = "row">
+					<div class = "col-sm-8 block-text">
+						<h1> {{name}} </h1> <br/>
+						
+						<div class = "container-fluid">
+							<div class = "row">
+								<div class = "col-sm-6 text-left"> 
+									<h4 class = "detail-title">Username</h4> 
+									<span id = "username" class = "code-font">{{username}}</span>
+								</div>
+								
+								<div class = "col-sm-6 text-center">
+									{{#if sessionflag}}
+									<h4> 
+										<a id = "report-icon" class = "report pointable" data-toggle = "modal" data-target = "#report-user"><span class = "glyphicon glyphicon-flag"> </span></a> &nbsp;
+										<a id = "report-status" class = "report pointable" data-toggle = "modal" data-target = "#report-user">Report User</a>
+									</h4>
+									{{/if}}
+								</div>
+							</div> <br/>
+							
+							<div class = "row">
+								<div class = "col-sm-6 text-left"> 
+									<h4 class = "detail-title">Email Address</h4>
+									<span id = "email" class = "code-font">{{email}}</span>
+								</div>
+							</div> <br/>
+							
+							<div class = "row">
+								<div class = "col-sm-6 text-left"> 
+									<h4 class = "detail-title">
+										Display Languages
+										<span data-toggle = "tooltip" title = "Preferred language in which quizzes are written" class = "glyphicon glyphicon-question-sign smaller-icon"> </span> 
+									</h4>
+									<span id = "display-languages" class = "code-font">{{displayLanguages}}</span>
+								</div>
+							</div>
+							
+						</div> <br/>
+					</div>
+					
+					<div class = "col-sm-4 text-center">
+						<div id = "container-for-overlay">
+							<div id = "overlay">
+							</div>
+							
+							<img id = "profile-picture" class = "profile-avatar-img" src = "{{{picture}}}">
+						</div>
+					</div>
+					
+				</div>
+			</div>
+			
+			<div class = "container-fluid odd-row">
+				<div class = "row">
+					<div class = "col-sm-12 block-text">
+						<h1> Leaderboard Details </h1>
+						<p> </p> <br/>
+						
+						<div class = "container-fluid">
+							<div class = "row">
+								<div class = "col-sm-3 text-center">
+									<img class = "leaderboard-icons" src = "../assets/streak.png">
+								</div>
+								
+								<div class = "col-sm-3 text-center">
+									<img class = "leaderboard-icons" src = "../assets/exp.png" style = "width: 70px;">
+								</div>
+								
+								<div class = "col-sm-3 text-center">
+									<img class = "leaderboard-icons" src = "../assets/featured.png">
+								</div>
+								
+								<div class = "col-sm-3 text-center">
+									<img class = "leaderboard-icons" src = "../assets/leaderboard.png">
+								</div>
+							</div>
+							
+							<div class = "row">
+								<div class = "col-sm-3 text-center">
+									<h4 class = "detail-title">Streak</h4>
+									{{streak}}
+								</div>
+								
+								<div class = "col-sm-3 text-center">
+									<h4 class = "detail-title">EXP</h4>
+									{{exp}}
+								</div>
+								
+								<div class = "col-sm-3 text-center">
+									<h4 class = "detail-title">League</h4>
+									{{league}}
+								</div>
+								
+								<div class = "col-sm-3 text-center">
+									<h4 class = "detail-title">Position</h4>
+									{{position}}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class = "container-fluid even-row">
+				<div class = "row">
+					<div class = "col-sm-12 block-text">
+						<h1> Quizzes Taken </h1>
+						<p> </p> <br/>
+						
+						<div class = "container-fluid">
+							<table id = "history-quizzes" class = "table table-hover table-responsive" data-page-length = "5">
+								<thead>
+									<tr>
+										<th> Date Taken </th>
+										<th> Quiz Name </th>
+										<th> Status </th>
+									</tr>
+								</thead>
+								
+								<tbody>
+								{{#each dates}}
+									<tr>
+										<td> {{this}} </td>
+										<td> <a class = "quiz-names" href = "/quizTeaser/{{{lookup ../ids @index}}}" target = "_blank">{{lookup ../titles @index}} </a> </td>
+										<td> {{lookup ../statuses @index}} </td>
+									</tr>
+								{{/each}}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			{{> footer}}
+		</div>
+
+		<div id = "report-user" class = "modal fade">
+			<div class = "modal-dialog">
+				<div class = "modal-content">
+					<div class = "modal-header">
+						<p class = "close-x pointable" data-dismiss = "modal"> &times; </p>
+						<h4> Report User </h4>
+					</div>
+					
+					<div class = "modal-body">
+						<form id = "report-user-form" method = "post">
+							<div class = "form-group">
+								<label for = "report-reasons" value = "">Reason for Reporting (Hold <span class = "code-font">ctrl</span> for multiple reasons)</label>
+								<select id = "report-reasons" class = "form-control" name = "reportReason">
+									<option value = "Hate Speech"> Hate Speech </option>
+									<option value = "Harassment"> Harassment </option>
+									<option value = "Inappropriate Content"> Inappropriate Content </option>
+									<option value = "Trolling"> Trolling </option>
+								</select>
+								<input id = "reportUsername" type = "hidden" name = "reportUsername" value = "{{{username}}}">
+								<input id = "reportName" type = "hidden" name = "reportName" value = "{{{name}}}">
+							</div>
+							
+							<div class = "form-group">
+								<label for = "confirm-report-user"> </label>
+								<button id = "confirm-report-user" type = "submit" class = "btn btn-default btn-success btn-block">
+									Report
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<script src = "../scripts/sidebar.js"> </script>
+		<script src = "../scripts/tooltip.js"> </script>
+		<script src = "../scripts/profile.js"> </script>
+	</body>
+</html>

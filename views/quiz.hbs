@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<title> {{title}} </title>
+		<link rel = "icon" type = "image/png" href = "../assets/languages.png">
+		
+		<link rel = "stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+		<link rel = "stylesheet" type = "text/css" href = "https://fonts.googleapis.com/css?family=Open+Sans">
+		<link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel = "stylesheet" type = "text/css" href = "../styles/style.css">
+		<link rel = "stylesheet" type = "text/css" href = "../styles/quiz-style.css">
+		
+		<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"> </script>
+		<script src = "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"> </script>
+		
+		<script>				
+			var questionBodiesFin = [];
+			var choicesAFin = [];
+			var choicesBFin = [];
+			var choicesCFin = [];
+			var choicesDFin = [];
+			var correctAnswersFin = [];
+			var explanationsFin = [];
+			var imagesFin = [];
+			var audiosFin = [];
+			
+			{{#each questionBodies}}
+				questionBodiesFin.push('{{this}}');
+			{{/each}}
+			
+			{{#each choicesA}}
+				choicesAFin.push('{{this}}');
+			{{/each}}
+			
+			{{#each choicesB}}
+				choicesBFin.push('{{this}}');
+			{{/each}}
+			
+			{{#each choicesC}}
+				choicesCFin.push('{{this}}');
+			{{/each}}
+			
+			{{#each choicesD}}
+				choicesDFin.push('{{this}}');
+			{{/each}}
+			
+			{{#each correctAnswers}}
+				correctAnswersFin.push('{{this}}');
+			{{/each}}
+			
+			{{#each explanations}}
+				explanationsFin.push('{{this}}');
+			{{/each}}
+			
+			{{#each images}}
+				imagesFin.push('{{this}}');
+			{{/each}}
+			
+			{{#each audios}}
+				audiosFin.push('{{this}}');
+			{{/each}}
+		</script>
+	</head>
+
+	<body id = "page-top" onload = "supplyContents(1, {{idNum}}, {{numItems}}, questionBodiesFin, choicesAFin, choicesBFin, choicesCFin, choicesDFin, correctAnswersFin, explanationsFin, imagesFin, audiosFin); resetSessionStorage();">		
+		<div id = "side-bar">
+			{{> sidebar flag = sessionflag adminflag = sessionadminflag username = sessionusername name = sessionname picture = sessionpicture streak = sessionstreak exp = sessionexp league = sessionleague position = sessionposition}}
+		</div>
+		
+		<div id = "page">
+			{{> navbar flag = sessionflag adminflag = sessionadminflag username = sessionusername name = sessionname firstname = sessionfirstname}}
+			<header class = "jumbotron top-header">
+				<div class = "container">
+					<div class = "row">
+						<div class = "col-sm-1"> </div>
+						<div class = "col-sm-4 text-center">
+							<img src = "../assets/languages.png">
+						</div>
+												
+						<div class = "col-sm-7 top-header-text">
+							<h1> {{title}} </h1> 
+							<h4><a class = "website" href = "/publicProfile/{{{author}}}"  target = "_blank">{{authorName}}</a> &nbsp; &nbsp; | &nbsp; &nbsp; {{numItems}} items </h4> <br/>
+							
+							<p class = "quiz-header-details"> 
+							
+								<span class = "glyphicon glyphicon-time left-float"> </span> &nbsp; {{dateCreated}} </br>
+								<span class = "glyphicon glyphicon-tag left-float"> </span> &nbsp; {{tags}} </br>
+								<span class = "glyphicon glyphicon-font left-float"> </span> &nbsp; Display language: {{displayLanguage}} <br/>
+								<span class = "glyphicon glyphicon-book left-float"> </span> &nbsp; Subject languages: {{subjectLanguages}} </br>
+							</p>
+						</div>
+					</div>
+				</div>
+			</header>
+			
+			<div class = "container-fluid even-row">
+				<div class = "row">
+					<div class = "col-sm-12 text-left question">
+						<h1> Question <span id = "question-num"></span> </h1> 
+							<p id = "question-body"> </p>
+							<p id = "image-body"> </p>
+							<p id = "audio-body"> </p>
+					</div>
+				</div>
+				
+				<div class = "row">
+					<div class = "col-sm-12 text-center">
+						<p class = "top-header-btn-grp"> 
+							<button id = "choice-a" class = "choices-btn impt left-grp" onclick = "chooseBtn(this)"> </button> 
+							<button id = "choice-b" class = "choices-btn impt right-grp" onclick = "chooseBtn(this)"> </button>
+						</p>
+						<p>
+							<button id = "choice-c" class = "choices-btn impt left-grp" onclick = "chooseBtn(this)"> </button> 
+							<button id = "choice-d" class = "choices-btn impt right-grp" onclick = "chooseBtn(this)"> </button> 
+						</p>
+					</div>
+					
+					<form id = "formStatsHidden">
+						<input id = "idNumHidden" type = "hidden" name = "idNumHidden">
+						<input id = "totalScoreHidden" type = "hidden" name = "totalScoreHidden">
+						<input id = "accuracyHidden" type = "hidden" name = "accuracyHidden">
+						<input id = "submitStatsHidden" type = "submit" name = "submitStatsHidden" style = "display: none;">
+					</form>
+				</div>
+				
+				<div class = "row choices-grp">
+					<div class = "col-sm-6 text-left">
+						<p id = "explanation"> 
+							
+						</p>
+					</div>
+					
+					<div class = "col-sm-6 text-right">
+						<p class = "top-header-btn-grp"> 
+							<button id = "next-frame" class = "choices-btn impt submit-answer" onclick = "getNextFrame(true)"> </button> 
+						</p>
+					</div>
+				</div>
+				
+				<div id = "comments" class = "container-fluid hidden-section">
+					{{#if sessionflag}}
+				
+					<div class = "row">
+						<div class = "col-sm-12 block-text">
+							<h3 id = "comments-section"> 
+								<a class = "edit pointable" data-toggle = "modal" data-target = "#add-comment" onclick = "fetchCurrQuestion()"><span class = "glyphicon glyphicon-plus"> </span></a> &nbsp;
+								<a class = "edit pointable" data-toggle = "modal" data-target = "#add-comment" onclick = "fetchCurrQuestion()">Add a comment</a> 
+							</h3>
+						</div>
+					</div> {{/if}} 
+					
+					<br/>
+					
+					<div id = "add-comment-space" class = "row hidden-section comment-space">
+						<div class = "col-sm-2 block-text">
+							<img class = "comment-avatar" src = "{{{sessionpicture}}}">
+						</div>
+						
+						<div class = "col-sm-9 text-left commenter-name">
+							<h4> <a class = "user-link pointable" onclick = "showSidebar()">{{sessionname}}</a> </h4> 
+							
+							<h6> 
+								<span id = "add-comment-date">CHANGE TO DATE TODAY</span> &nbsp; | &nbsp; 
+								<a id = "add-comment-edit-text" class = "edit pointable" data-toggle = "modal">Edit comment</a> &nbsp; 
+								<a id = "add-comment-edit-icon" class = "edit pointable" data-toggle = "modal"><span class = "glyphicon glyphicon-pencil"> </span></a>
+								&nbsp; | &nbsp;
+								<a id = "add-comment-delete-text" class = "delete pointable" data-toggle = "modal">Delete comment</a> &nbsp; 
+								<a id = "add-comment-delete-icon" class = "delete pointable" data-toggle = "modal"><span class = "glyphicon glyphicon-trash"> </span></a>
+							</h6>
+							
+							<p id = "add-comment-body">  </p>
+						</div> <br/>
+					</div> 
+					
+					{{#each commentIds}}
+					
+						{{#if (checkIfUserComment ../sessionusername (lookup ../commentAuthors @index))}}
+							<div id = "new-comment-space-{{{this}}}" class = "row comment-space">
+								<div class = "col-sm-2 block-text">
+									<img class = "comment-avatar" src = "{{{lookup ../commentAuthorPictures @index}}}">
+								</div>
+								
+								<div class = "col-sm-9 text-left commenter-name">
+									<h4> <a class = "user-link pointable" onclick = "showSidebar()">{{lookup ../commentAuthorNames @index}}</a> </h4> 
+									
+									<h6> 
+										<span id = "comment-date-{{{this}}}">{{lookup ../datesPosted @index}} </span> &nbsp; | &nbsp;
+										<a class = "edit pointable" data-toggle = "modal" data-target = "#edit-comment-{{{this}}}" onclick = "fetchComment({{{this}}})">Edit comment</a> &nbsp; 
+										<a class = "edit pointable" data-toggle = "modal" data-target = "#edit-comment-{{{this}}}" onclick = "fetchComment({{{this}}})"><span class = "glyphicon glyphicon-pencil"> </span></a>
+										&nbsp; | &nbsp;
+										<a class = "delete pointable" data-toggle = "modal" data-target = "#delete-comment-{{{this}}}">Delete comment</a> &nbsp; 
+										<a class = "delete pointable" data-toggle = "modal" data-target = "#delete-comment-{{{this}}}"><span class = "glyphicon glyphicon-trash"> </span></a>
+									</h6>
+									
+									<p id = "comment-{{{this}}}"> {{lookup ../bodies @index}} </p>
+								</div>  <br/>
+							</div>
+						
+						{{else}}
+							<div id = "new-comment-space-{{{this}}}" class = "row comment-space">
+								<div class = "col-sm-2 block-text">
+									<img class = "comment-avatar" src = "{{{lookup ../commentAuthorPictures @index}}}">
+								</div>
+								
+								<div class = "col-sm-9 text-left commenter-name">
+									<h4> <a class = "user-link pointable" href = "/publicProfile/{{{lookup ../commentAuthors @index}}}" target = "_blank"><span id = "report-author-{{{this}}}">{{lookup ../commentAuthorNames @index}}</span></a> </h4> 
+									
+									<h6> 
+										{{lookup ../datesPosted @index}} &nbsp; | &nbsp; 
+										<a id = "report-status-{{{this}}}" class = "report pointable" data-toggle = "modal" data-target = "#report-comment-{{{this}}}" onclick = "fetchCommentData({{{this}}})">Report comment</a> &nbsp; 
+										<a id = "report-icon-{{{this}}}" class = "report pointable" data-toggle = "modal" data-target = "#report-comment-{{{this}}}"><span class = "glyphicon glyphicon-flag" onclick = "fetchCommentData({{{this}}})"> </span></a>
+									</h6>
+									
+									<p id = "report-body-{{{this}}}"> {{lookup ../bodies @index}} </p>
+								</div> <br/>
+							</div> 
+						{{/if}}
+					{{/each}}
+				
+				</div>
+			</div>
+			
+			{{> footer}}
+		</div>
+		
+		<div id = "add-comment" class = "modal fade">
+			<div class = "modal-dialog">
+				<div class = "modal-content">
+					<div class = "modal-header">
+						<p class = "close-x pointable" data-dismiss = "modal"> &times; </p>
+						<h4> Add Comment </h4>
+					</div>
+					
+					<div class = "modal-body">
+						<form id = "add-comment-form" method = "post">
+							<div class = "form-group">
+								<label for = "addedComment" value = ""> </label>
+								<input id = "idNum" type = "hidden" name = "idNum">
+								<input id = "currentItem" type = "hidden" name = "currentItem">
+								<textarea id = "addedComment" class = "form-control" name = "addedComment"> </textarea>
+							</div>
+							
+							<div class = "form-group">
+								<label for = "confirm-add-comment"> </label>
+								<button id = "confirm-add-comment" type = "submit" class = "btn btn-default btn-success btn-block">
+									Comment
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div id = "edit-comment" class = "modal fade">
+			<div class = "modal-dialog">
+				<div class = "modal-content">
+					<div class = "modal-header">
+						<p class = "close-x pointable" data-dismiss = "modal"> &times; </p>
+						<h4> Edit Comment </h4>
+					</div>
+					
+					<div class = "modal-body">
+						<form id = "edit-form" class = "edit-form" method = "post">
+							<div class = "form-group">
+								<input id = "idNumEdit" type = "hidden" name = "idNum">
+								<input id = "commentNumEdit" type = "hidden" name = "commentNum">
+								<label for = "edited-comment" value = ""> </label>
+								<textarea id = "edited-comment" name = "editedComment" class = "form-control"> </textarea>
+							</div>
+							
+							<div class = "form-group">
+								<label for = "confirm-edit-comment"> </label>
+								<button id = "confirm-edit-comment" type = "submit" class = "btn btn-default btn-success btn-block">
+									Edit
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		{{#each commentIds}}
+		<div id = "edit-comment-{{{this}}}" class = "modal fade">
+			<div class = "modal-dialog">
+				<div class = "modal-content">
+					<div class = "modal-header">
+						<p class = "close-x pointable" data-dismiss = "modal"> &times; </p>
+						<h4> Edit Comment </h4>
+					</div>
+					
+					<div class = "modal-body">
+						<form id = "edit-form-{{{this}}}" class = "edit-form" method = "post">
+							<div class = "form-group">
+								<input id = "idNumEdit" type = "hidden" name = "idNum" value = "{{{../idNum}}}">
+								<input id = "commentNumEdit-{{{this}}}" type = "hidden" name = "commentNum" value = "{{{this}}}">
+								<label for = "edited-comment-{{{this}}}" value = ""> </label>
+								<textarea id = "edited-comment-{{{this}}}" name = "editedComment" class = "form-control"> </textarea>
+							</div>
+							
+							<div class = "form-group">
+								<label for = "confirm-edit-comment"> </label>
+								<button id = "confirm-edit-comment" type = "submit" class = "btn btn-default btn-success btn-block">
+									Edit
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		{{/each}}
+		
+		{{#each commentIds}}
+		<div id = "report-comment-{{{this}}}" class = "modal fade">
+			<div class = "modal-dialog">
+				<div class = "modal-content">
+					<div class = "modal-header">
+						<p class = "close-x pointable" data-dismiss = "modal"> &times; </p>
+						<h4> Report Comment </h4>
+					</div>
+					
+					<div class = "modal-body">
+						<form id = "report-comment-form-{{{this}}}" class = "report-comment-form" method = "post">
+							<div class = "form-group">
+								<label for = "report-reasons" value = "">Reason for Reporting </label>
+								<select id = "report-reasons" class = "form-control" name = "commentReport">
+									<option value = "Hate Speech">Hate Speech</option>
+									<option value = "Harassment">Harassment</option>
+									<option value = "Inappropriate Content">Inappropriate Content</option>
+									<option value = "Trolling">Trolling</option>
+								</select>
+							</div>
+							
+							<div class = "form-group">
+								<input id = "reportIdnum" type = "hidden" name = "reportIdnum" value = "{{{../ idNum}}}">
+								<input id = "reportQuizname" type = "hidden" name = "reportQuizname" value = "{{{../ title}}}">
+								<input id = "reportCommentnum-{{{this}}}" type = "hidden" name = "reportCommentnum">
+								<input id = "reportAuthor-{{{this}}}" type = "hidden" name = "reportAuthor">
+								<input id = "reportCommentbody-{{{this}}}" type = "hidden" name = "reportCommentbody">
+								<label for = "confirm-report-comment"> </label>
+								<button id = "confirm-report-comment-{{{this}}}" type = "submit" class = "btn btn-default btn-success btn-block">
+									Report
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		{{/each}}
+		
+		
+		<div id = "delete-comment" class = "modal fade">
+			<div class = "modal-dialog">
+				<div class = "modal-content">
+					<div class = "modal-header">
+						<p class = "close-x pointable" data-dismiss = "modal"> &times; </p>
+						<h4> Delete Comment </h4>
+					</div>
+					
+					<div class = "modal-body">
+						<form id = "delete-form" method = "post" class = "delete-form">
+							<p> Comment deletion is irreversible. Once you delete your comment, it cannot be restored. </p>
+							
+							<div class = "form-group">
+								<label for = "confirm-delete-comment"> </label>
+								<input id = "idNumDelete" type = "hidden" name = "idNum">
+								<input id = "commentNumDelete" type = "hidden" name = "commentNum">
+								<button id = "confirm-delete-comment" type = "submit" class = "btn btn-default btn-success btn-block">
+									Delete
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		{{#each commentIds}}
+		<div id = "delete-comment-{{{this}}}" class = "modal fade">
+			<div class = "modal-dialog">
+				<div class = "modal-content">
+					<div class = "modal-header">
+						<p class = "close-x pointable" data-dismiss = "modal"> &times; </p>
+						<h4> Delete Comment </h4>
+					</div>
+					
+					<div class = "modal-body">
+						<form id = "delete-form-{{{this}}}" method = "post" class = "delete-form">
+							<p> Comment deletion is irreversible. Once you delete your comment, it cannot be restored. </p>
+							
+							<div class = "form-group">
+								<label for = "confirm-delete-comment"> </label>
+								<input id = "idNumDelete-{{{this}}}" type = "hidden" name = "idNum" value = "{{{../idNum}}}">
+								<input id = "commentNumDelete-{{{this}}}" type = "hidden" name = "commentNum" value = "{{{this}}}">
+								<button id = "confirm-delete-comment-{{{this}}}" type = "submit" class = "btn btn-default btn-success btn-block">
+									Delete
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		{{/each}}
+		
+		<script src = "../scripts/sidebar.js"> </script>
+		<script src = "../scripts/quiz.js"> </script>		
+		
+	</body>
+
+</html>

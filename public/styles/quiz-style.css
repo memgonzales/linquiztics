@@ -1,0 +1,100 @@
+.quiz-header-details {
+	font-style: italic;
+	font-size: 17px !important;
+}
+
+.checked {
+	color: orange;
+}
+
+.commenter-name {
+	padding-left: 50px;
+}
+
+.report, .edit, .delete {
+	color: inherit;
+}
+
+.report:hover, .edit:hover, .delete:hover {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.choices-grp {
+	padding-left: 14%;
+	padding-right: 14%;
+}
+
+.choices-btn {
+	width: 35%;
+	border-radius: 70px;
+	padding: 15px;
+	border: 3px solid var(--header-color);
+}
+
+.left-grp {
+	margin-right: 1%;
+}
+
+.right-grp {
+	margin-left: 1%;
+}
+
+.question {
+	padding-left: 14%;
+	padding-right: 14%;
+}
+
+.submit-answer {
+	background-color: var(--header-color);
+	color: white;
+}
+
+.submit-answer:hover {
+	background-color: var(--hover-header-color);
+}
+
+#explanation {
+	display: none;
+}
+
+.small-icons {
+	width: 20px;
+	height: 20px;
+}
+
+.thin {
+	padding-left: 0.5px;
+	width: 16.5px;
+	height: 20px;
+}
+
+#private-notice {
+	padding-right: 10%;
+}
+
+#incorrect-answers, #correct-answers {
+	font-size: 13px;
+}
+
+#desc-rating {
+	margin-left: 30px;
+}
+
+#incorrect-answers tbody tr td, #correct-answers tbody tr td {
+	background-color: var(--even-color);
+}
+
+#incorrect-answers tbody tr:hover td, #correct-answers tbody tr:hover td{
+	background-color: var(--odd-color);
+}
+
+.quiz-img {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.comment-space {
+	margin-bottom: 20px;
+}

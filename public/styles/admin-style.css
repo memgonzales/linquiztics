@@ -1,0 +1,23 @@
+#all-user-accounts tbody tr td, #correct-answers tbody tr td {
+	background-color: var(--odd-color);
+}
+
+#all-user-accounts tbody tr:hover td, #correct-answers tbody tr:hover td{
+	background-color: var(--impt-btn-color);
+}
+
+#all-user-quizzes tbody tr td {
+	background-color: var(--even-color);
+}
+
+#all-user-quizzes tbody tr:hover td {
+	background-color: var(--odd-color);
+}
+
+#all-user-comments tbody tr td, #correct-answers tbody tr td {
+	background-color: var(--odd-color);
+}
+
+#all-user-comments tbody tr:hover td, #correct-answers tbody tr:hover td{
+	background-color: var(--impt-btn-color);
+}

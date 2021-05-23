@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<title> Admin </title>
+		<link rel = "icon" type = "image/png" href = "../assets/languages.png">
+		
+		<link rel = "stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+		<link rel = "stylesheet" href = "https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+		<link rel = "stylesheet" type = "text/css" href = "https://fonts.googleapis.com/css?family=Open+Sans">
+		<link rel = "stylesheet" type = "text/css" href = "../styles/style.css">
+		<link rel = "stylesheet" type = "text/css" href = "../styles/profile-style.css">
+		<link rel = "stylesheet" type = "text/css" href = "../styles/admin-style.css">
+		
+		<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"> </script>
+		<script src = "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"> </script>
+		<script src = "https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"> </script>
+		
+		<!-- Internal style sheet necessary to override DataTables formatting -->
+		<style>		
+			.dataTables_wrapper .dataTables_paginate .paginate_button {
+			  background: none;
+			  color: black !important;
+			  border: 0 !important;
+			}
+			
+			.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+			  background: none;
+			  color: black !important;
+			  border: 0 !important;
+			}
+
+			.dataTables_wrapper .dataTables_paginate .paginate_button:active {
+			  background: none;
+			  color: black !important;
+			  border: 0 !important;
+			}
+		</style>
+	</head>
+
+	<body id = "page-top">
+		<div id = "side-bar">
+			{{> sidebar flag = flag adminflag = adminflag username = username name = name picture = picture streak = streak exp = exp league = league position = position}}
+		</div>
+		
+		<div id = "page">
+			{{> navbar flag = flag adminflag = adminflag username = username name = name firstname = firstname}}
+			
+			<div class = "container-fluid even-row header-row">
+				<div class = "row">
+					<div class = "col-sm-8 block-text">
+						<h1> Administrator </h1> <br/>
+						
+						<div class = "container-fluid">
+							<div class = "row">
+								<div class = "col-sm-6 text-left"> 
+									<h4 class = "detail-title">Username</h4> 
+									<span id = "username" class = "code-font">{{username}}</span>
+								</div>
+							</div> <br/>
+							
+							<div class = "row">
+								<div class = "col-sm-6 text-left"> 
+									<h4 class = "detail-title">Email Address</h4>
+									<span id = "email" class = "code-font">{{email}}</span>
+								</div>
+							</div> <br/>
+							
+							<div class = "row">
+								<div class = "col-sm-6 text-left"> 
+									<h4 class = "detail-title">Password 
+										<span data-toggle = "tooltip" title = "Must contain 8 to 128 characters, with at least one special character, number, and capital letter" class = "glyphicon glyphicon-question-sign smaller-icon"> </span> 
+									</h4>
+									<span id = "password" class = "code-font">******</span>
+								</div>
+							</div> <br/>
+						</div>
+					</div>
+
+					<div class = "col-sm-4 text-center">
+						<div id = "container-for-overlay" class = "pointable">
+							<div id = "overlay" class = "pointable">
+							
+								<form id = "edit-profile-picture-form" method = "post" enctype = "multipart/form-data">
+									<label for = "profile-picture-upload" class = "pointable"> Change Picture &nbsp; <span class = "glyphicon glyphicon-picture"> </span> </label>
+									<input id = "profile-picture-upload" type = "file" accept = "image/*" name = "newProfilePicture" style = "display: none; ">
+									
+									<input id = "confirm-change-profile-picture" type = "submit" style = "display: none;">
+								</form>
+								
+							</div>
+							
+							<img id = "profile-picture" class = "profile-avatar-img" src = "{{{picture}}}">
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class = "container-fluid odd-row">
+				<div class = "row">
+					<div class = "col-sm-12 block-text">
+						<h1> Delete User Account </h1>
+						<p> Delete the accounts of users that have violated the terms and conditions of the site. Account deletion removes all personal data, leaderboard data, created quizzes, and comments of the user. </p> <br/>
+						
+						<div class = "container-fluid">
+							<table id = "all-user-accounts" class = "table table-hover table-responsive" data-page-length = "5">
+								<thead>
+									<tr>
+										<th> ID </th>
+										<th> Name </th>
+										<th> Username </th>
+										<th> Report Date </th>
+										<th> Report </th>
+										<th> Action </th>
+									</tr>
+								</thead>
+								
+								<tbody>
+									{{#each userIndices}}
+									<tr id = "user-{{{this}}}">
+										<td id = "userIndex-{{{this}}}"> {{this}} </td>
+										<td> <a class = "quiz-names" href = "/publicProfile/{{{lookup ../userUsernames @index}}}" target = "_blank"> <span id = "userName-{{{this}}}"> {{lookup ../userNames @index}} </span></a> </td>
+										<td id = "userUsername-{{{this}}}" class = "code-font"> {{lookup ../userUsernames @index}} </td>
+										<td id = "userReportDates-{{{this}}}"> {{lookup ../userReportDates @index}} </td>
+										<td id = "userReport-{{{this}}}"> {{lookup ../userReports @index}} </td>
+										<td> 
+											<a class = "website pointable" data-toggle = "modal" data-target = "#delete-user-account" onclick = "fetchUserReport({{{this}}})"><span class = "glyphicon glyphicon-trash"></span></a> &nbsp; 
+											<a class = "website pointable" data-toggle = "modal" data-target = "#delete-user-account" onclick = "fetchUserReport({{{this}}})">Delete</a>
+										</td>
+									</tr>
+									{{/each}}
+								</tbody>
+							</table>
+						</div> <br/>
+					</div>
+				</div>
+			</div>
+			
+			<div class = "container-fluid even-row">
+				<div class = "row">
+					<div class = "col-sm-12 block-text">
+						<h1> Unpublish Quiz </h1>
+						<p> Unpublish quizzes that have violated the terms and conditions of the site. Unpublishing a quiz prevents other users from accessing it. </p> </br>
+						
+						<div class = "container-fluid">
+							<table id = "all-user-quizzes" class = "table table-hover table-responsive" data-page-length = "5">
+								<thead>
+									<tr>
+										<th> ID </th>
+										<th> Quiz Title </th>
+										<th> Author </th>
+										<th> Report Date </th>
+										<th> Report </th>
+										<th> Action </th>
+									</tr>
+								</thead>
+								
+								<tbody>
+									{{#each quizIndices}}
+									<tr id = "quiz-{{{this}}}">
+										<td id = "quizIndex-{{{this}}}"> {{this}} </td>
+										<td> <a class = "quiz-names" href = "/quizTeaser/{{{lookup ../quizQuizNums @index}}}" target = "_blank"> <span id = "quizTitle-{{{this}}}"> {{lookup ../quizTitles @index}} </span></a></td>
+										<td> <a class = "quiz-names code-font" href = "/publicProfile/{{{lookup ../quizAuthors @index}}}" target = "_blank"> <span id = "quizAuthor-{{{this}}}"> {{lookup ../quizAuthors @index}} </span></a></td>
+										<td id = "quizReportDate-{{{this}}}"> {{lookup ../quizReportDates @index}} </td>
+										<td id = "quizReport-{{{this}}}"> {{lookup ../quizReports @index}} </td>
+										<td> 
+											<a class = "website pointable" data-toggle = "modal" data-target = "#unpublish-user-quiz" onclick = "fetchQuizReport({{{this}}})"><span class = "glyphicon glyphicon-eye-close"></span></a> &nbsp; 
+											<a class = "website pointable" data-toggle = "modal" data-target = "#unpublish-user-quiz" onclick = "fetchQuizReport({{{this}}})">Unpublish</a>
+										</td>
+										<input id = "quizQuizNum-{{{this}}}" type = "hidden" value = "{{{lookup ../quizQuizNums @index}}}">
+									</tr>
+									{{/each}}
+								</tbody>
+							</table>
+						</div> <br/>
+					</div>
+				</div>
+			</div>
+			
+			<div class = "container-fluid odd-row">
+				<div class = "row">
+					<div class = "col-sm-12 block-text">
+						<h1> Delete Quiz & Quiz Item Comment </h1>
+						<p> Delete comments that have violated the terms and conditions of the site. Comments on both the quizzes themselves and on specific quiz items can be deleted. </p> <br/>
+						
+						<div class = "container-fluid">
+							<table id = "all-user-comments" class = "table table-hover table-responsive" data-page-length = "5">
+								<thead>
+									<tr>
+										<th> ID </th>
+										<th> Comment </th>
+										<th> Commenter </th>
+										<th> Quiz </th>
+										<th> Report Date </th>
+										<th> Report </th>
+										<th> Action </th>									
+									</tr>
+								</thead>
+								
+								<tbody>
+									{{#each commentIndices}}
+									<tr id = "comment-{{{this}}}">
+										<td id = "commentIndex-{{{this}}}"> {{this}} </td>
+										<td id = "commentComment-{{{this}}}"> {{lookup ../commentComments @index}} </td>
+										<td> <a class = "quiz-names code-font" href = "/publicProfile/{{{lookup ../commentAuthors @index}}}" target = "_blank"> <span id = "commentAuthor-{{{this}}}"> {{lookup ../commentAuthors @index}} </span></a></td>
+										<td> <a class = "quiz-names" href = "/quizTeaser/{{{lookup ../commentQuizNums @index}}}" target = "_blank"> <span id = "commentQuiz-{{{this}}}"> {{lookup ../commentQuizzes @index}} </span></a></td>
+										<td id = "commentReportDate-{{{this}}}"> {{lookup ../commentReportDates @index}} </td>
+										<td id = "commentReport-{{{this}}}"> {{lookup ../commentReports @index}} </td>
+										<td> 
+											<a class = "website pointable" data-toggle = "modal" data-target = "#delete-user-comment" onclick = "fetchCommentReport({{{this}}})"><span class = "glyphicon glyphicon-trash"></span></a> &nbsp; 
+											<a class = "website pointable" data-toggle = "modal" data-target = "#delete-user-comment" onclick = "fetchCommentReport({{{this}}})">Delete</a>
+										</td>
+										<input id = "commentQuizNum-{{{this}}}" type = "hidden" value = "{{{lookup ../commentQuizNums @index}}}">
+										<input id = "commentCommentNum-{{{this}}}" type = "hidden" value = "{{{lookup ../commentCommentNums @index}}}">
+									</tr>
+									{{/each}}
+								</tbody>
+							</table>
+						</div> <br/>
+					</div>
+				</div>
+			</div>
+			
+			{{> footer}}
+		</div>
+
+		<div id = "delete-user-account" class = "modal fade">
+			<div class = "modal-dialog">
+				<div class = "modal-content">
+					<div class = "modal-header">
+						<p class = "close-x pointable" data-dismiss = "modal"> &times; </p>
+						<h4> <span class = "glyphicon glyphicon-warning-sign left-float"> </span> &nbsp; Delete User Account </h4>
+					</div>
+					
+					<div class = "modal-body">
+						<form id = "delete-user-form" method = "post">
+							<p> Deleting the account removes all the user's personal data, leaderboard data, created quizzes, and comments from the site database. Account deletion is irreversible. </p>
+							
+							<div class = "form-group">
+								<label for = "confirm-delete-account"> </label>
+								<input id = "deleteUsername" type = "hidden" name = "deleteUsername">
+								<input id = "deleteUserindex" type = "hidden" name = "deleteUserindex">
+								<button id = "confirm-delete-account" type = "submit" class = "btn btn-default btn-success btn-block">
+									Delete User Account
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div id = "unpublish-user-quiz" class = "modal fade">
+			<div class = "modal-dialog">
+				<div class = "modal-content">
+					<div class = "modal-header">
+						<p class = "close-x pointable" data-dismiss = "modal"> &times; </p>
+						<h4> <span class = "glyphicon glyphicon-warning-sign left-float"> </span> &nbsp; Unpublish Quiz </h4>
+					</div>
+					
+					<div class = "modal-body">
+						<form id = "unpublish-quiz-form" method = "post">
+							<p> Unpublishing a quiz prevents other users from accessing it, allowing users to edit their quiz to conform to the site terms and conditions. </p>
+
+							<div class = "form-group">
+								<label for = "confirm-unpub-quiz"> </label>
+								<input id = "deleteQuiznum" type = "hidden" name = "deleteQuiznum">
+								<input id = "deleteQuizindex" type = "hidden" name = "deleteQuizindex">
+								<button id = "confirm-unpub-quiz" type = "submit" class = "btn btn-default btn-success btn-block">
+									Unpublish Quiz
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div id = "delete-user-comment" class = "modal fade">
+			<div class = "modal-dialog">
+				<div class = "modal-content">
+					<div class = "modal-header">
+						<p class = "close-x pointable" data-dismiss = "modal"> &times; </p>
+						<h4> <span class = "glyphicon glyphicon-warning-sign left-float"> </span> &nbsp; Delete Comment </h4>
+					</div>
+					
+					<div class = "modal-body">
+						<form id = "delete-comment-form" method = "post">
+							<p> Deleting a comment will remove it from the database and both the quiz creator and other users from seeing the comment. </p> 
+							
+							<div class = "form-group">
+								<input id = "deleteCommentnum" type = "hidden" name = "deleteCommentnum">
+								<input id = "deleteCommentquiznum" type = "hidden" name = "deleteCommentquiznum">
+								<input id = "deleteCommentindex" type = "hidden" name = "deleteCommentindex">
+								<label for = "confirm-delete-comment"> </label>
+								<button id = "confirm-delete-comment" type = "submit" class = "btn btn-default btn-success btn-block">
+									Delete Comment
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<script src = "../scripts/tooltip.js"> </script>
+		<script src = "../scripts/sidebar.js"> </script>
+		<script src = "../scripts/profile.js"> </script>
+		<script src = "../scripts/admin.js"> </script>
+	</body>
+
+</html>
