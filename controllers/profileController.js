@@ -531,11 +531,11 @@ const profileController = {
 
                     db.updateMany(Quiz, filter, update, function(error, result) {
                         var pcondition = {username: req.session.username};
-
+						
                         db.deleteOne(Profile, pcondition, function(error, result) {
-                            req.session.destroy(function(err) {
+                            req.session.destroy(function(err) {								
                                 if (err) throw err;
-                                res.status(200).send;
+                                res.status(200).send();
                             });
                         });
                     });
