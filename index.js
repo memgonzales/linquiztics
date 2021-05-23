@@ -19,7 +19,7 @@ const app = express();
 
 dotenv.config();
 port = process.env.PORT;
-hostname = process.env.HOSTNAME;
+hostname = process.env.HOSTNAME || 3000;
 
 app.set('view engine', 'hbs');
 

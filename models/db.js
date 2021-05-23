@@ -9,7 +9,7 @@ const multer = require('multer');
 const GridFsStorage = require('multer-gridfs-storage');
 const Grid = require('gridfs-stream');
 
-const url = 'mongodb://localhost:27017/linquiztics';
+const url = 'mongodb+srv://admin:admin@linquiztics.k1zxp.mongodb.net/linquiztics?retryWrites=true&w=majority';
 
 const options = {
 	useNewUrlParser: true,
