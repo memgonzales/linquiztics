@@ -72,6 +72,9 @@ const quizController = {
 				}
 				
 				averageRating = averageRating / ratings.length;
+
+				if (ratings.length == 0)
+					averageRating = 0;
 				
 				var averageAccuracies = 0;
 				for (var i = 0; i < accuracies.length; i++) {
@@ -80,6 +83,9 @@ const quizController = {
 				
 				averageAccuracies = averageAccuracies / accuracies.length;
 				averageAccuracies = averageAccuracies.toFixed(2);
+
+				if (accuracies.length == 0)
+					averageAccuracies = 0;
 
 				var query = {username: commentAuthors};
 				var projection = 'username name picture';
@@ -1421,10 +1427,16 @@ const quizController = {
 		var subjectLanguages = req.body.langSelection;
 		var dateUpdated = new Date();
 
+		tagsArray = tags.split(",");
+
+		for (var i = 0; i < tagsArray.length; i++) {
+		    tagsArray[i] = tagsArray[i].trim();
+		}
+
 		var filter = {idNum: idNum};
 		var update = {
 			title: title,
-			tags: tags,
+			tags: tagsArray,
 			displayLanguage: displayLanguage,
 			subjectLanguages: subjectLanguages,
 			dateUpdated: dateUpdated
