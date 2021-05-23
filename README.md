@@ -195,7 +195,7 @@ Open the following website: http://linquiztics.herokuapp.com.
    
     ```
    app listening at port 3000
-   Connected to: mongodb+srv://admin:admin@linquiztics.ndejq.mongodb.net/linquiztics?retryWrites=true&w=majority
+   Connected to: mongodb+srv://admin:admin@linquiztics.k1zxp.mongodb.net/linquiztics?retryWrites=true&w=majority
    ```
    
    
