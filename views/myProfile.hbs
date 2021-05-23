@@ -107,7 +107,7 @@
 								</div>
 								{{#if adminflag}} {{else}}
 								<div class = "col-sm-4 text-left"> 
-									<button class = "block-btn-small" data-toggle = "modal" data-target = "#edit-lang"> Edit </button>
+									<button class = "block-btn-small" data-toggle = "modal" data-target = "#edit-lang" onclick = "fetchDisplayLanguages()"> Edit </button>
 								</div>
 								{{/if}}
 							</div>
@@ -365,7 +365,7 @@
 						<form id = "edit-lang-form" method = "post">
 							<div class = "form-group">
 								<label for = "lang-selection">Display Languages (Hold <span class = "code-font">ctrl</span> for multiple languages)</label>
-								<select id = "lang-selection"name = "displayLangs" class = "form-control" multiple>
+								<select id = "lang-selection" name = "displayLangs" class = "form-control" multiple>
 									<option value = "Chinese">Chinese</option>
 									<option value = "English">English</option>
 									<option value = "Filipino">Filipino</option>

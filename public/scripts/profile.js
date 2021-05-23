@@ -178,6 +178,15 @@ function checkPassword(password) {
 	return true;
 }
 
+function fetchDisplayLanguages() {	
+	var displayLanguagesStr = document.getElementById("display-languages").innerHTML;
+	var displayLanguages = displayLanguagesStr.split(', ');
+		
+	for (var i = 0; i < displayLanguages.length; i++) {
+		$('#lang-selection > [value = ' + displayLanguages[i] + ']').prop('selected', true);
+	}
+}
+
 
 function editUsername(newName) {
 	$('#hello').text("Hello, " + newName.split(' ')[0] + "!");
