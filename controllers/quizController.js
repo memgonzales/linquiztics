@@ -56,15 +56,17 @@ const quizController = {
 				}
 								
 				var cleanSubjectLanguages = "";
-				for (var i = 0; i < subjectLanguages.length; i++) {
-					cleanSubjectLanguages += subjectLanguages[i];
-					
-					if (subjectLanguages.length != 1) {
-						if (i != subjectLanguages.length - 1) {
-							cleanSubjectLanguages += ", ";
+				if (subjectLanguages) {
+					for (var i = 0; i < subjectLanguages.length; i++) {
+						cleanSubjectLanguages += subjectLanguages[i];
+						
+						if (subjectLanguages.length != 1) {
+							if (i != subjectLanguages.length - 1) {
+								cleanSubjectLanguages += ", ";
+							}
 						}
 					}
-				}
+				}		
 
 				var averageRating = 0;
 				for (var i = 0; i < ratings.length; i++) {
@@ -1182,10 +1184,13 @@ const quizController = {
 				for (i = 1; i < result.tags.length; i++)
 					cleanTags += ", " + result.tags[i];
 
-				cleanSubjectLanguages = result.subjectLanguages[0];
-				for (i = 1; i < result.subjectLanguages.length; i++)
-					cleanSubjectLanguages += ", " + result.subjectLanguages[i];
-
+				cleanSubjectLanguages = "";
+				if (result.subjectLanguages) {
+					cleanSubjectLanguages = result.subjectLanguages[0];
+					for (i = 1; i < result.subjectLanguages.length; i++)
+						cleanSubjectLanguages += ", " + result.subjectLanguages[i];
+				}
+				
 				for (i = 0; i < result.comments.length; i++) {
 					commentDates.push(result.comments[i].datePosted.getMonth() + 1 + "-" + result.comments[i].datePosted.getDate() + "-" + 
 									  result.comments[i].datePosted.getFullYear());
@@ -1688,7 +1693,7 @@ const quizController = {
 
 			var newQuiz = {
 				tags: ["tag1", "tag2", "tag3", "tag4", "tag5"],
-				subjectLanguages: [],
+				subjectLanguages: ["English"],
 				ratings: [],
 				accuracies: [],
 				idNum: newIdNum,
@@ -1698,7 +1703,7 @@ const quizController = {
 				numItems: 1,
 				dateCreated: dateCreated,
 				dateUpdated: dateCreated,
-				displayLanguage: "",
+				displayLanguage: "Chinese",
 				description: 'Place your description here. <p>You can use HTML markup tags, such as &#60;br&#62;, &#60;pre&#62;, &#60;b&#62;, and &#60;i&#62;, to enrich the formatting of your description.</p> <p>In most browsers, diacritics (such as the tilde in ñ and the cedilla in ç) can be typed directly inside the text box.</p> <p>If you encounter problems related to rendering, consider using <a class = "website" target = "_blank" href = "https://www.w3schools.com/charsets/ref_utf_diacritical.asp">HTML UTF-8 diacritical marks</a> <a class = "edit pointable" target = "_blank" href = "https://www.w3schools.com/charsets/ref_utf_diacritical.asp"><span class = "glyphicon glyphicon-new-window smaller-icon"></span></a></p>',
 				timesTaken: 0,
 				comments: [
