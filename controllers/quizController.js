@@ -1166,6 +1166,7 @@ const quizController = {
 				var dateCreated;
 				var cleanTags;
 				var cleanSubjectLanguages;
+				var comments;
 				var commentDates = [];
 				var commentAuthors = [];
 				var aveRating = 0;
@@ -1191,6 +1192,8 @@ const quizController = {
 						cleanSubjectLanguages += ", " + result.subjectLanguages[i];
 				}
 				
+				comments = result.comments;
+
 				for (i = 0; i < result.comments.length; i++) {
 					commentDates.push(result.comments[i].datePosted.getMonth() + 1 + "-" + result.comments[i].datePosted.getDate() + "-" + 
 									  result.comments[i].datePosted.getFullYear());
@@ -1357,7 +1360,7 @@ const quizController = {
 				                    cleanTags: cleanTags,
 				                    cleanSubjectLanguages: cleanSubjectLanguages,
 				                    description: result.description,
-				                    comments: result.comments,
+				                    comments: comments,
 				                    commentDates: commentDates,
 				                    commentPics: commentPics,
 				                    commentNames: commentNames,
@@ -1399,7 +1402,7 @@ const quizController = {
 				                    cleanTags: cleanTags,
 				                    cleanSubjectLanguages: cleanSubjectLanguages,
 				                    description: result.description,
-				                    comments: result.comments,
+				                    comments: comments,
 				                    commentDates: commentDates,
 				                    commentPics: commentPics,
 				                    commentNames: commentNames,
