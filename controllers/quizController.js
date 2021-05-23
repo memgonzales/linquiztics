@@ -1707,7 +1707,7 @@ const quizController = {
 				dateCreated: dateCreated,
 				dateUpdated: dateCreated,
 				displayLanguage: "Chinese",
-				description: 'Place your description here. <p>You can use HTML markup tags, such as &#60;br&#62;, &#60;pre&#62;, &#60;b&#62;, and &#60;i&#62;, to enrich the formatting of your description.</p> <p>In most browsers, diacritics (such as the tilde in ñ and the cedilla in ç) can be typed directly inside the text box.</p> <p>If you encounter problems related to rendering, consider using <a class = "website" target = "_blank" href = "https://www.w3schools.com/charsets/ref_utf_diacritical.asp">HTML UTF-8 diacritical marks</a> <a class = "edit pointable" target = "_blank" href = "https://www.w3schools.com/charsets/ref_utf_diacritical.asp"><span class = "glyphicon glyphicon-new-window smaller-icon"></span></a></p>',
+				description: 'Place your description here. <p></p><br/><p style = "font-size:14px;">You can use HTML markup tags, such as &#60;br&#62;, &#60;pre&#62;, &#60;b&#62;, and &#60;i&#62;, to enrich the formatting of your description.</p> <p style = "font-size:14px;">In most browsers, diacritics (such as the tilde in ñ and the cedilla in ç) can be typed directly inside the text box.</p> <p style = "font-size:14px;">If you encounter problems related to rendering, consider using <a class = "website" target = "_blank" href = "https://www.w3schools.com/charsets/ref_utf_diacritical.asp">HTML UTF-8 diacritical marks</a> <a class = "edit pointable" target = "_blank" href = "https://www.w3schools.com/charsets/ref_utf_diacritical.asp"><span class = "glyphicon glyphicon-new-window smaller-icon"></span></a></p>',
 				timesTaken: 0,
 				comments: [
 
@@ -1715,7 +1715,7 @@ const quizController = {
 				questions: [
 					{
 						index: 1,
-						body: "Give a description of the task.",
+						body: "The body of the question goes here.",
 						choiceA: "Supply one of the choices.",
 						choiceB: "Supply one of the choices.",
 						choiceC: "Supply one of the choices.",
