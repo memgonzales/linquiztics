@@ -11,7 +11,7 @@ const quizController = {
 		var projection = 'tags subjectLanguages ratings accuracies idNum status title author numItems dateCreated displayLanguage description comments';
 
 		db.findOne (Quiz, query, projection, function (result) {			
-			if (result != null) {				
+			if (result != null && result.author) {				
 			
 				var tags = result.tags;
 				var subjectLanguages = result.subjectLanguages;
