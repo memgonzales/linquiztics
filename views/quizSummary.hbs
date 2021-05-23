@@ -329,6 +329,7 @@
 									</div> <br/>
 								
 								{{else}}
+									{{#if (lookup ../commentAuthorNames @index)}}
 									<div id = "new-comment-space-{{{this}}}" class = "row comment-space">
 										<div class = "col-sm-2 text-left">
 											<img class = "comment-avatar" src = "{{{lookup ../commentAuthorPictures @index}}}">
@@ -346,6 +347,7 @@
 											<p id = "report-body-{{{this}}}"> {{lookup ../bodies @index}} </p>
 										</div>
 									</div> <br/>
+									{{/if}}
 								{{/if}}
 							{{/each}}
 						</div>

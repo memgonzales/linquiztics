@@ -204,13 +204,15 @@
 								</thead>
 								
 								<tbody>
-								{{#each dates}}
+								{{#each titles}}
+								{{#if this}}
 									<tr>
-										<td> {{this}} </td>
-										<td> <a class = "quiz-names" href = "/quizTeaser/{{{lookup ../ids @index}}}" target = "_blank">{{lookup ../titles @index}} </a> </td>
+										<td> {{lookup ../dates @index}} </td>
+										<td> <a class = "quiz-names" href = "/quizTeaser/{{{lookup ../ids @index}}}" target = "_blank">{{this}} </a> </td>
 										<td> {{lookup ../accuracies @index}}% </td>
 										<td> {{lookup ../statuses @index}} </td>
 									</tr>
+								{{/if}}
 								{{/each}}
 								</tbody>
 							</table>
@@ -394,7 +396,7 @@
 					
 					<div class = "modal-body">
 						<form id = "delete-account-form" method = "post">
-							<p id = "password-warning"> Deleting your account removes all your personal data, leaderboard data, created quizzes, and comments from the site database. Account deletion is irreversible. </p> <br/>
+							<p id = "password-warning"> Deleting your account removes all your personal data, leaderboard data, and created quizzes from the site database. Account deletion is irreversible. </p> <br/>
 							
 							<div class = "form-group">
 								<label for = "password-for-del">Enter password

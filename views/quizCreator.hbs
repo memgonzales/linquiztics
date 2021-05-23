@@ -72,6 +72,7 @@
 						
 						<div class = "container-fluid">
 							{{#each comments}}
+							{{#if (lookup ../commentNames @index)}}
 							<div class = "row">
 								<div class = "col-sm-2 text-left">
 									<img class = "comment-avatar" src = "{{{lookup ../commentPics @index}}}">
@@ -89,6 +90,7 @@
 									<br><br>
 								</div>
 							</div>
+							{{/if}}
 							{{/each}}
 						</div>
 					</div>
@@ -192,6 +194,7 @@
 						<h2> </h2> <br/>
 						<div class = "container-fluid">
 						{{#each this.commentdata}}
+							{{#if this.quizCommentName}}
 							<div class = "row">
 								<div class = "col-sm-3 text-left">
 									<img class = "comment-avatar" src = "{{{this.quizCommentPic}}}">
@@ -208,6 +211,7 @@
 									<p id = "comment-body-{{{this.quizCommentNum}}}"> {{this.quizCommentBody}} </p>
 								</div>
 							</div>
+							{{/if}}
 						{{/each}}
 						</div>
 					</div>

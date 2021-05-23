@@ -507,14 +507,40 @@ const profileController = {
         bcrypt.compare(password, req.session.password, function (err, equal) {
             if (equal) {
 
-                var condition = {username: req.session.username};
+                var query = {username: req.session.username};
+                var projection = 'quizzesCreated';
 
-                db.deleteOne(Profile, condition, function(err, result) {
-                    req.session.destroy(function(err) {
-                        if(err) throw err;
-                        res.status(200).send();
+                db.findOne(Profile, query, projection, function(result) {
+                    var ids = result.quizzesCreated;
+
+                    var filter = {idNum: ids};
+                    var update = {
+                        status: "Deleted",
+                        author: "",
+                        numItems: 0,
+                        displayLanguage: "",
+                        description: "",
+                        timesTaken: 0,
+                        tags: [],
+                        subjectLanguages: [],
+                        ratings: [],
+                        accuracies: [],
+                        comments: [],
+                        questions: []
+                    }
+
+                    db.updateMany(Quiz, filter, update, function(error, result) {
+                        var pcondition = {username: req.session.username};
+
+                        db.deleteOne(Profile, pcondition, function(error, result) {
+                            req.session.destroy(function(err) {
+                                if (err) throw err;
+                                res.status(200).send;
+                            });
+                        });
                     });
-                }); 
+                });
+                
             } else {	
 				res.status(403).send();
 			}
@@ -677,19 +703,41 @@ const profileController = {
     postDeleteUserAdmin: function(req, res) {
         var username = req.body.deleteUsername.trim();
         var index = req.body.deleteUserindex;
-        
-        console.log(username);
-        console.log(index);
 
-        var conditions = {username: username};
+        var query = {username: username};
+        var projection = 'quizzesCreated';
 
-        db.deleteOne(Profile, conditions, function(error, result) {
-            var userconditions = {index: index};
+        db.findOne(Profile, query, projection, function(result) {
+            var ids = result.quizzesCreated;
 
-            db.deleteOne(Userreport, userconditions, function(error, result) {
-                res.status(200).send();
-            });
-        });
+            var filter = {idNum: ids};
+            var update = {
+                status: "Deleted",
+                author: "",
+                numItems: 0,
+                displayLanguage: "",
+                description: "",
+                timesTaken: 0,
+                tags: [],
+                subjectLanguages: [],
+                ratings: [],
+                accuracies: [],
+                comments: [],
+                questions: []
+            }
+            
+            db.updateMany(Quiz, filter, update, function(error, result) {
+                var pcondition = {username: username};
+
+                db.deleteOne(Profile, condition, function(error, result) {
+                    var userconditions = {index: index};
+
+                    db.deleteOne(Userreport, userconditions, function(error, result) {
+                        res.status(200).send();
+                    });
+                });
+            });      
+        });   
     },
 
     postUnpublishQuizAdmin: function(req, res) {
