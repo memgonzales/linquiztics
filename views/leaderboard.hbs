@@ -55,7 +55,7 @@
 				<div class = "row">
 					{{#each top}}
 					<div class = "col-sm-4 text-center">
-						<img class = "leaderboard-avatar" src = "{{{this.picture}}}">
+						<a class = "username" href = "/publicProfile/{{{this.username}}}" target = "_blank"><img class = "leaderboard-avatar" src = "{{{this.picture}}}"></a>
 						<a class = "username" href = "/publicProfile/{{{this.username}}}" target = "_blank"><h2> {{this.name}} </h2></a>
 						<h4 class = "code-font"> {{this.exp}} EXP </h4>
 					</div>
