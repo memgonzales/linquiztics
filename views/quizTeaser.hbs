@@ -72,7 +72,6 @@
 						
 						<h3> Comments </h3>
 						
-						{{#if sessionflag}}
 						<div class = "container-fluid">
 							<br/>
 
@@ -102,7 +101,8 @@
 									<br/>
 								
 								{{else}}
-									{{#if (lookup ../commentAuthorNames @index)}}
+								
+								
 									<div class = "row" id = "comment-container-{{{this}}}">
 										<div class = "col-sm-2 text-left">
 											<img class = "comment-avatar" src = "{{{lookup ../commentAuthorPictures @index}}}">
@@ -120,60 +120,13 @@
 											<p id = "report-body-{{{this}}}"> {{lookup ../bodies @index}} </p>
 										</div>
 									</div>
+									
 									<br/>
-									{{/if}}	
+									
 								{{/if}}
 							{{/each}}
 							
 						</div>
-						
-						{{else}}
-						<div class = "container-fluid">
-							<br/>
-
-							{{#each commentIds}}
-								{{#if (checkIfUserComment ../sessionusername (lookup ../commentAuthors @index))}}
-								
-									<div class = "row" id = "comment-container-{{{this}}}">
-										<div class = "col-sm-2 text-left">
-											<img class = "comment-avatar" src = "{{{lookup ../commentAuthorPictures @index}}}">
-										</div>
-										
-										<div class = "col-sm-9 text-left commenter-name">
-											<h4> <a class = "user-link pointable" onclick = "showSidebar()">{{lookup ../commentAuthorNames @index}}</a> </h4> 
-											<h6> 
-												<span id = "comment-date-{{{this}}}">{{lookup ../datesPosted @index}} </span> 
-											</h6>
-											
-											<p id = "comment-{{{this}}}"> {{lookup ../bodies @index}} </p>
-										</div>
-									</div>
-									
-									<br/>
-								
-								{{else}}
-									{{#if (lookup ../commentAuthorNames @index)}}
-									<div class = "row" id = "comment-container-{{{this}}}">
-										<div class = "col-sm-2 text-left">
-											<img class = "comment-avatar" src = "{{{lookup ../commentAuthorPictures @index}}}">
-										</div>
-									
-										<div class = "col-sm-9 text-left commenter-name">
-											<h4> <a class = "user-link pointable" href = "/publicProfile/{{{lookup ../commentAuthors @index}}}" target = "_blank"><span id = "report-author-{{{this}}}">{{lookup ../commentAuthorNames @index}}</span></a> </h4> 
-											<h6> 
-												{{lookup ../datesPosted @index}} 
-											</h6>
-											
-											<p id = "report-body-{{{this}}}"> {{lookup ../bodies @index}} </p>
-										</div>
-									</div>
-									<br/>
-									{{/if}}	
-								{{/if}}
-							{{/each}}
-							
-						</div>
-						{{/if}}
 						
 						
 					</div>
