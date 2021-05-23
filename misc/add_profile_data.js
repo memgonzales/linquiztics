@@ -8,10 +8,10 @@ db.connect();
 
 bcrypt.hash('ASDFGHJKL123;', saltRounds, function (err, hash) {
 	var person1 = {
-		name: 'Jace Gianina Yuchengco',
+		name: 'Gianina Yuchengco',
 		picture: '../assets/doggo.jpg',
-		username: 'jacegyuchengco',
-		email: 'jacegyuchengco@gmail.com',
+		username: 'gianinayuchengco',
+		email: 'gianinayuchengco@gmail.com',
 		password: hash,
 		displayLanguages: ['English', 'Filipino'],
 		streak: 12,
