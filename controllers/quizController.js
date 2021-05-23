@@ -1023,6 +1023,8 @@ const quizController = {
 						}
 
 						ave = ave / num;
+						if (num == 0)
+							ave = 0;
 
 						for (i = 0; i < qresult.length; i++) {
 							if (qresult[i].status != "Deleted") {
@@ -1228,6 +1230,8 @@ const quizController = {
 					quizCommentBodies.push(tempBodies);
 				}
 
+				aveRating = 0;
+
 				for (i = 0; i < result.ratings.length; i++) {
 					aveRating += result.ratings[i];
 
@@ -1248,6 +1252,8 @@ const quizController = {
 
 				else
 					aveRating = aveRating / result.ratings.length;
+
+				aveAccuracy = 0;
 
 				for (i = 0; i < result.accuracies.length; i++) {
 					aveAccuracy += result.accuracies[i];
