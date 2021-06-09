@@ -62,7 +62,7 @@ Open the following website: http://linquiztics.herokuapp.com.
    npm install
    ```
 
-   If the command is executed successfully, the dependencies will be installed into the folder <code>node_modules</code> following the dependency tree found in <code>package-lock.json</code>.
+   If the command is executed successfully, the dependencies will be installed into the folder <code>node_modules</code> following the dependency tree found in <a href = "https://github.com/memgonzales/linquiztics/blob/master/package-lock.json"><code>package-lock.json</code></a>.
 
 ###
    ***The project uses a pre-populated remote database. DO STEPS 4 TO 8 ONLY AFTER A DATABASE RESET OR MIGRATION TO A LOCAL DATABASE.***
