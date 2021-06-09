@@ -78,6 +78,7 @@ const quizzesController = {
 						topDatePics.push("../assets/british.png");
 				}
 				
+				/* Handle less than 3 tags */
 				for (i = 0; i < 3; i++) {
 					if (topDate[i].tags[2]) {
 						topDateTags.push(topDate[i].tags[0] + ", " + topDate[i].tags[1] + ", " + topDate[i].tags[2]);
