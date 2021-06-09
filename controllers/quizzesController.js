@@ -77,9 +77,25 @@ const quizzesController = {
 					else
 						topDatePics.push("../assets/british.png");
 				}
-
-				for (i = 0; i < 3; i++)
-					topDateTags.push(topDate[i].tags[0] + ", " + topDate[i].tags[1] + ", " + topDate[i].tags[2]);
+				
+				for (i = 0; i < 3; i++) {
+					if (topDate[i].tags[2]) {
+						topDateTags.push(topDate[i].tags[0] + ", " + topDate[i].tags[1] + ", " + topDate[i].tags[2]);
+						
+					} else {
+						if (topDate[i].tags[1]) {
+							topDateTags.push(topDate[i].tags[0] + ", " + topDate[i].tags[1]);
+							
+						} else {
+							if (topDate[i].tags[0]) {
+								topDateTags.push(topDate[i].tags[0]);
+								
+							} else {
+								topDateTags.push("No tags provided");
+							}
+						}
+					}
+				}
 
 				allQuizzes.sort(function (a, b) {
 					var keyA = a.ratings;
