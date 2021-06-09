@@ -65,7 +65,7 @@ Open the following website: http://linquiztics.herokuapp.com.
    If the command is executed successfully, the dependencies will be installed into the folder <code>node_modules</code> following the dependency tree found in <code>package-lock.json</code>.
 
 ###
-   ***The project uses a pre-populated remote database. Do steps 4 to 8 only after a database reset or migration to a local database.***
+   ***The project uses a pre-populated remote database. DO STEPS 4 TO 8 ONLY AFTER A DATABASE RESET OR MIGRATION TO A LOCAL DATABASE.***
 
 4. On the main project directory, run the following command to populate the database with **user accounts**: 
 
@@ -213,6 +213,14 @@ Open the following website: http://linquiztics.herokuapp.com.
 To log in as an administrator, go to the <a href = "https://linquiztics.herokuapp.com/login">Login</a> page and enter the following credentials:
    - Username: <code>linquizticsadmin</code>
    - Password: <code>ASDFGHJKL123;</code>
+   
+### Login Credentials (For Testing)
+To test the features of a (non-administrator) user account, it is recommended to log in using the following credentials:
+   - Username: <code>gianinayuchengco</code>
+   - Password: <code>ASDFGHJKL123;</code>
+   
+Note that there are 23 pre-registered user accounts; the usernames are found in the file <a href = "https://github.com/memgonzales/linquiztics/blob/master/misc/add_profile_data.js"><code>misc/add_profile_data.js</code></a>. The password to all these accounts is <code>ASDFGHJKL123;</code>. (The period is not included.)
+
 
 ## Built Using
 This project follows the Model-View-Controller (MVC) architectural pattern:
