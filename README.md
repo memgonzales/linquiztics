@@ -54,6 +54,15 @@ Open the following website: http://linquiztics.herokuapp.com.
      ```
      git clone https://github.com/DLSU-CCAPDEV/2021T2-G31
      ```
+   
+     or 
+   
+     ```
+     git clone https://github.com/memgonzales/linquiztics
+     ```
+   
+     *The first repository is the official course submission. The second repository (this repository) is the deployed one. The contents of both repositories are identical.*
+   
    - If git is not installed, click the green 'Code' button near the top right of the repository and choose 'Download ZIP'. Once the zipped folder has been downloaded, extract its contents.
 
 3. On the main project directory, run the following command to **install the dependencies**: 
