@@ -1,4 +1,13 @@
 # Linquiztics
+![badge][badge-html5]
+![badge][badge-bootstrap]
+![badge][badge-js]
+![badge][badge-jquery]
+![badge][badge-mongodb]
+![badge][badge-express]
+![badge][badge-nodejs]
+![badge][badge-heroku]
+
 Linquiztics &mdash; a play on <i>linguistics</i> and <i>quiz</i> &mdash; is a language learning web application that allows users to create their own quizzes and to answer those made by the community of users. It also features incentivization dynamics designed to gamify learning through customized quiz suggestions, experience points, streaks, leagues, and a global leaderboard. 
 
 The deployed website can be accessed through this link: http://linquiztics.herokuapp.com.
@@ -6,7 +15,7 @@ The deployed website can be accessed through this link: http://linquiztics.herok
 ***Kindly enter a valid email address during the creation of an account. The web application will send an email to this registered email address after the account has been created and in the event of a password change.***
 
 ## Task
-**Linquiztics** is the major course output in a web development class. The students are tasked to create a web application of their choice, provided that it satisfies the minimum requirement of supporting the following operations: <i>log in, log out, register, CRUD (create, read, update, and delete),</i> and <i>search</i>. The application development is divided into three phases:
+**Linquiztics** is the major course output in a web development class under Mr. Arren C. Antioquia of the Department of Software Technology, De La Salle University. The students are tasked to create a web application of their choice, provided that it satisfies the minimum requirement of supporting the following operations: <i>log in, log out, register, CRUD (create, read, update, and delete),</i> and <i>search</i>. The application development is divided into three phases:
 
 | Phase | Duration | Description |
 | --- | --- | --- |
@@ -54,6 +63,15 @@ Open the following website: http://linquiztics.herokuapp.com.
      ```
      git clone https://github.com/DLSU-CCAPDEV/2021T2-G31
      ```
+   
+     or 
+   
+     ```
+     git clone https://github.com/memgonzales/linquiztics
+     ```
+   
+     *The first repository is the official course submission. The second repository (this repository) is the deployed one. The contents of both repositories are identical.*
+   
    - If git is not installed, click the green 'Code' button near the top right of the repository and choose 'Download ZIP'. Once the zipped folder has been downloaded, extract its contents.
 
 3. On the main project directory, run the following command to **install the dependencies**: 
@@ -264,3 +282,13 @@ This project uses the following dependencies, which can be installed via the <co
 For queries or concerns related to the Linquiztics project, kindly email linquiztics.webmaster@gmail.com.
   
 Assets (images and audio files) are properties of their respective owners. Attribution is found in the file <a href = "https://github.com/memgonzales/linquiztics/blob/master/public/assets/credits.txt"><code>public/assets/credits.txt</code></a> and displayed publicly on the <a href = "http://linquiztics.herokuapp.com/credits">Credits</a> page.
+
+[badge-html5]: https://img.shields.io/badge/html5-%23E34F26.svg?style=flat&logo=html5&logoColor=white
+[badge-bootstrap]: https://img.shields.io/badge/bootstrap-%23563D7C.svg?style=flat&logo=bootstrap&logoColor=white
+[badge-js]: https://img.shields.io/badge/javascript-%23323330.svg?style=flate&logo=javascript&logoColor=%23F7DF1E
+[badge-jquery]: https://img.shields.io/badge/jquery-%230769AD.svg?style=flat&logo=jquery&logoColor=white
+[badge-mongodb]: https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=flat&logo=mongodb&logoColor=white
+[badge-express]: https://img.shields.io/badge/express.js-%23404d59.svg?style=flat&logo=express&logoColor=%2361DAFB
+[badge-nodejs]: https://img.shields.io/badge/node.js-6DA55F?style=flat&logo=node.js&logoColor=white
+[badge-mocha]: https://img.shields.io/badge/-mocha-%238D6748?style=flat&logo=mocha&logoColor=white
+[badge-heroku]: https://img.shields.io/badge/Heroku-430098?style=flat&logo=heroku&logoColor=white
