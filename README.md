@@ -39,7 +39,6 @@ It also includes the following files:
 
 | File | Description |
 | --- | --- |
-| <a href = "https://github.com/memgonzales/linquiztics/blob/master/.env"><code>.env</code></a> | Contains the working environment variables |
 | <a href = "https://github.com/memgonzales/linquiztics/blob/master/package-lock.json"><code>package-lock.json</code></a> and <a href = "https://github.com/memgonzales/linquiztics/blob/master/package.json"><code>package.json</code></a> | Store information on the project dependencies |
 | <a href = "https://github.com/memgonzales/linquiztics/blob/master/index.js"><code>index.js</code></a> | Entry point of the web application |
 
