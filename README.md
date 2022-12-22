@@ -6,7 +6,7 @@ The deployed website can be accessed through this link: http://linquiztics.herok
 ***Kindly enter a valid email address during the creation of an account. The web application will send an email to this registered email address after the account has been created and in the event of a password change.***
 
 ## Task
-**Linquiztics** is the major course output in a web development class. The students are tasked to create a web application of their choice, provided that it satisfies the minimum requirement of supporting the following operations: <i>log in, log out, register, CRUD (create, read, update, and delete),</i> and <i>search</i>. The application development is divided into three phases:
+**Linquiztics** is the major course output in a web development class under Mr. Arren C. Antioquia of the Department of Software Technology, De La Salle University. The students are tasked to create a web application of their choice, provided that it satisfies the minimum requirement of supporting the following operations: <i>log in, log out, register, CRUD (create, read, update, and delete),</i> and <i>search</i>. The application development is divided into three phases:
 
 | Phase | Duration | Description |
 | --- | --- | --- |
