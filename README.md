@@ -6,11 +6,10 @@
 ![badge][badge-mongodb]
 ![badge][badge-express]
 ![badge][badge-nodejs]
-![badge][badge-heroku]
 
 Linquiztics &mdash; a play on <i>linguistics</i> and <i>quiz</i> &mdash; is a language learning web application that allows users to create their own quizzes and to answer those made by the community of users. It also features incentivization dynamics designed to gamify learning through customized quiz suggestions, experience points, streaks, leagues, and a global leaderboard. 
 
-The deployed website can be accessed through this link: http://linquiztics.herokuapp.com.
+💡 **UPDATE (12/22/2022): With the shutting down of free Heroku services, we have migrated to Railway: https://linquiztics.up.railway.app/**
 
 ***Kindly enter a valid email address during the creation of an account. The web application will send an email to this registered email address after the account has been created and in the event of a password change.***
 
@@ -46,7 +45,7 @@ The complete project specifications can be found in the file <a href = "https://
 
 ## Running the Application
 ### Running on the Web
-Open the following website: http://linquiztics.herokuapp.com.
+Open the following website: https://linquiztics.up.railway.app/
 
 ### Running Locally
 1. Before running the application locally, the following software have to be installed:
@@ -60,18 +59,10 @@ Open the following website: http://linquiztics.herokuapp.com.
    - If git is installed, type the following command on the terminal:
    
      ```
-     git clone https://github.com/DLSU-CCAPDEV/2021T2-G31
-     ```
-   
-     or 
-   
-     ```
      git clone https://github.com/memgonzales/linquiztics
      ```
    
-     *The first repository is the official course submission. The second repository (this repository) is the deployed one. The contents of both repositories are identical.*
-   
-   - If git is not installed, click the green 'Code' button near the top right of the repository and choose 'Download ZIP'. Once the zipped folder has been downloaded, extract its contents.
+   - If git is not installed, click the green `Code` button near the top right of the repository and choose `Download ZIP`. Once the zipped folder has been downloaded, extract its contents.
 
 3. On the main project directory, run the following command to **install the dependencies**: 
 
@@ -227,7 +218,7 @@ Open the following website: http://linquiztics.herokuapp.com.
      <img src="https://github.com/memgonzales/linquiztics/blob/master/website_screenshots/home.PNG?raw=True" alt="Homepage" width = 750> 
    
 ### Administrator Credentials  
-To log in as an administrator, go to the <a href = "https://linquiztics.herokuapp.com/login">Login</a> page and enter the following credentials:
+To log in as an administrator, go to the <a href = "https://linquiztics.up.railway.app/login">Login</a> page and enter the following credentials:
    - Username: <code>linquizticsadmin</code>
    - Password: <code>ASDFGHJKL123;</code>
    
@@ -246,6 +237,8 @@ This project follows the Model-View-Controller (MVC) architectural pattern:
 - **Controller:** <a href = "https://nodejs.org/en/">Node.js</a> as the server environment
 
 This web application is deployed on the cloud platform <a href = "https://dashboard.heroku.com/">Heroku</a>. Since Heroku has an ephemeral filesystem, <a href = "https://docs.mongodb.com/manual/core/gridfs/">GridFS</a> is used for the persistent storage of image and audio files.
+   
+💡 UPDATE (12/22/2022): With the shutting down of free Heroku services, we have migrated to [Railway](https://railway.app/), another cloud PaaS.
 
 ## Dependencies
 This project uses the following dependencies, which can be installed via the <code>npm install</code> command:
@@ -280,7 +273,7 @@ This project uses the following dependencies, which can be installed via the <co
   
 For queries or concerns related to the Linquiztics project, kindly email linquiztics.webmaster@gmail.com.
   
-Assets (images and audio files) are properties of their respective owners. Attribution is found in the file <a href = "https://github.com/memgonzales/linquiztics/blob/master/public/assets/credits.txt"><code>public/assets/credits.txt</code></a> and displayed publicly on the <a href = "http://linquiztics.herokuapp.com/credits">Credits</a> page.
+Assets (images and audio files) are properties of their respective owners. Attribution is found in the file <a href = "https://github.com/memgonzales/linquiztics/blob/master/public/assets/credits.txt"><code>public/assets/credits.txt</code></a> and displayed publicly on the <a href = "https://linquiztics.up.railway.app/credits">Credits</a> page.
 
 [badge-html5]: https://img.shields.io/badge/html5-%23E34F26.svg?style=flat&logo=html5&logoColor=white
 [badge-bootstrap]: https://img.shields.io/badge/bootstrap-%23563D7C.svg?style=flat&logo=bootstrap&logoColor=white
