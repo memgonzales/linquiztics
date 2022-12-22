@@ -73,7 +73,7 @@ Open the following website: https://linquiztics.up.railway.app/
    If the command is executed successfully, the dependencies will be installed into the folder <code>node_modules</code> following the dependency tree found in <a href = "https://github.com/memgonzales/linquiztics/blob/master/package-lock.json"><code>package-lock.json</code></a>.
 
 ###
-   ***The project uses a pre-populated remote database. DO STEPS 4 TO 8 ONLY AFTER A DATABASE RESET OR MIGRATION TO A LOCAL DATABASE.***
+   ***This project uses a pre-populated remote database. DO STEPS 4 TO 8 ONLY AFTER A DATABASE RESET OR MIGRATION TO A LOCAL DATABASE.***
 
 4. On the main project directory, run the following command to populate the database with **user accounts**: 
 
@@ -238,7 +238,7 @@ This project follows the Model-View-Controller (MVC) architectural pattern:
 
 This web application is deployed on the cloud platform <a href = "https://dashboard.heroku.com/">Heroku</a>. Since Heroku has an ephemeral filesystem, <a href = "https://docs.mongodb.com/manual/core/gridfs/">GridFS</a> is used for the persistent storage of image and audio files.
    
-💡 UPDATE (12/22/2022): With the shutting down of free Heroku services, we have migrated to [Railway](https://railway.app/), another cloud PaaS.
+💡 **UPDATE (12/22/2022):** With the shutting down of free Heroku services, we have migrated to [Railway](https://railway.app/), another cloud PaaS.
 
 ## Dependencies
 This project uses the following dependencies, which can be installed via the <code>npm install</code> command:
