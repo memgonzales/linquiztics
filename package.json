@@ -4,6 +4,7 @@
   "description": "<b>Linquiztics</b> &mdash; a play on <i>linguistics</i> and <i>quiz</i> &mdash; is a language learning web application that allows users to create their own quizzes and answer those made by the community of users. It also features incentivization dynamics designed to gamify learning through experience points, streaks, leagues, and a global leaderboard.",
   "main": "index.js",
   "scripts": {
+	"start": "node index.js"
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
